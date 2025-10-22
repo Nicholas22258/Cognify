@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This drawable defines the visual appearance of the button, used here for the button background. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Button colour -->
+    <solid android:color="@color/button_background" />
+
+    <!-- Button's rounded radius -->
+    <corners android:radius="12dp" />
+</shape>
