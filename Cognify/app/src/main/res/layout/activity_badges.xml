@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+- @Author Nicholas Leong        EDUV4551823
+- @Author Aarya Manowah         be.2023.q4t9k6
+- @Author Nyasha Masket 		BE.2023.R3M0Y0
+- @Author Sakhile Lesedi Mnisi 	BE.2022.j9f3j4
+- @Author Dominic Newton 		EDUV4818782
+- @Author Kimberly Sean Sibanda EDUV4818746
+-
+- Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_dark">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/badges_back_arrow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/back_arrow"
+            android:padding="4dp"
+            android:onClick="onBackPressed" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="My Badges"
+            android:textSize="20sp"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+    </LinearLayout>
+
+    <!-- Total Badges Counter -->
+    <TextView
+        android:id="@+id/tv_total_badges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Badges Earned: 0/12"
+        android:textSize="16sp"
+        android:textColor="@color/accent_orange"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Badges Grid -->
+    <GridView
+        android:id="@+id/grid_badges"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:horizontalSpacing="8dp"
+        android:numColumns="2"
+        android:padding="16dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="8dp" />
+
+</LinearLayout>

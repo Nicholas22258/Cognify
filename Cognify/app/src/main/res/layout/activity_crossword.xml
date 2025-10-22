@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- @Author Nicholas Leong        EDUV4551823
+- @Author Aarya Manowah         be.2023.q4t9k6
+- @Author Nyasha Masket 		BE.2023.R3M0Y0
+- @Author Sakhile Lesedi Mnisi 	BE.2022.j9f3j4
+- @Author Dominic Newton 		EDUV4818782
+- @Author Kimberly Sean Sibanda EDUV4818746
+-
+- Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    tools:context=".Crossword"
+    android:background="@color/black">
+
+    <ImageButton
+        android:id="@+id/cancel_button"
+        android:layout_width="45sp"
+        android:layout_height="45sp"
+        android:background="@drawable/back_arrow"
+        android:contentDescription="@string/cancel_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <TextView
+        android:id="@+id/headingCW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/headingCrossword"
+        android:textSize="24sp"
+        android:textColor="@color/orangeHeading"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--This textview will show the description of the game. I could not find a way to fit it in.-->
+<!--    <TextView-->
+<!--        android:id="@+id/descriptionDB"-->
+<!--        android:layout_width="363dp"-->
+<!--        android:layout_height="69dp"-->
+<!--        android:text="@string/descriptionCW"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="19sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.108" />-->
+
+    <!--This textview will show the time the learner is taking to play. I could not find a way to fit it in.-->
+    <TextView
+        android:id="@+id/stopwatchTimer"
+        android:layout_width="121dp"
+        android:layout_height="46dp"
+        android:text="@string/defaultTime"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.205" />
+
+    <FrameLayout
+        android:id="@+id/frameLayoutGridContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/headingCW"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"
+        app:layout_constraintDimensionRatio="1:1">
+
+        <!--Crossword game will show here-->
+        <GridLayout
+            android:id="@+id/gridLayoutCrossword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alignmentMode="alignMargins"
+            android:textColor="@color/white"
+            android:columnCount="10"
+            android:rowCount="10"/>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <!--Button to check the user's answers-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/checkAnswerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/db_check_button"
+        android:text="@string/check_button"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/frameLayoutGridContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!--Layout to display the clues/definitions-->
+    <LinearLayout
+        android:id="@+id/linearLayoutClues"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/checkAnswerButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/clueAcross"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/orangeHeading"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewAcrossClues"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                tools:listitem="@layout/cw_clue_item" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/clueDown"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/orangeHeading"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewDownClues"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                tools:listitem="@layout/cw_clue_item" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

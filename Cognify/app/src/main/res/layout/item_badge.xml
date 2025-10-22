@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/badge_item_background"
+    android:padding="12dp"
+    android:layout_margin="4dp">
+
+    <ImageView
+        android:id="@+id/iv_badge_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tv_badge_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_badge_icon"
+        android:text="Badge Name"
+        android:textSize="12sp"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tv_badge_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_badge_name"
+        android:text="Badge description goes here"
+        android:textSize="10sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <ImageView
+        android:id="@+id/iv_earned_indicator"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_check_circle"
+        android:background="@drawable/circle_background_accent"
+        android:padding="4dp"
+        android:visibility="gone" />
+
+</RelativeLayout>

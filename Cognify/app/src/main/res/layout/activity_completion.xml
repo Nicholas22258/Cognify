@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+- @Author Nicholas Leong        EDUV4551823
+- @Author Aarya Manowah         be.2023.q4t9k6
+- @Author Nyasha Masket 		BE.2023.R3M0Y0
+- @Author Sakhile Lesedi Mnisi 	BE.2022.j9f3j4
+- @Author Dominic Newton 		EDUV4818782
+- @Author Kimberly Sean Sibanda EDUV4818746
+-
+- Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradientbgd">
+
+    <TextView
+        android:id="@+id/completionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:text="Your varsity experience awaits"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif" />
+
+    <ImageView
+        android:id="@+id/checkmarkIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/checkmark_background"
+        android:src="@drawable/checkmark_icon"
+        android:contentDescription="Success Checkmark" />
+
+    <Button
+        android:id="@+id/startAppButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:backgroundTint="#FF9800"
+        android:text="Let's indulge ! >"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif" />
+
+</RelativeLayout>
