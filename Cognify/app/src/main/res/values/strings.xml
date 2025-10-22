@@ -1,0 +1,190 @@
+<resources>
+    <string name="app_name">Learning App</string>
+
+    <!-- Header -->
+    <string name="hello">Hello,</string>
+    <string name="user_name">Kimberly</string>
+
+    <!-- Section titles -->
+    <string name="games_title">Games</string>
+    <string name="courses_title">Courses</string>
+
+    <!-- Game names -->
+    <string name="matching_game">Matching Game</string>
+    <string name="definition_builder">Definition Builder</string>
+    <string name="word_master">Word Master</string>
+
+    <!-- Course codes -->
+    <string name="course_1">ITMDA3-33</string>
+    <string name="course_2">ITOOA3-13</string>
+    <string name="course_3">CTAA3-21</string>
+
+    <!-- Bottom nav -->
+    <string name="nav_home">Home</string>
+    <string name="nav_books">Books</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_games">Games</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Days of week -->
+    <string name="monday">M</string>
+    <string name="tuesday">T</string>
+    <string name="wednesday">W</string>
+    <string name="thursday">T</string>
+    <string name="friday">F</string>
+    <string name="saturday">S</string>
+    <string name="sunday">S</string>
+
+    <!-- Main Activity -->
+    <string name="main_title">Gamified Learning App</string>
+    <string name="main_subtitle">What are we learning today?</string>
+    <string name="btn_go_to_profile">Go to Profile</string>
+    <string name="main_description">Welcome to your gamified learning journey! Tap the button above to access your profile, badges, and milestones.</string>
+
+    <!-- Profile Activity -->
+    <string name="profile_title">Profile</string>
+    <string name="username_label">Username: Kimberly Sibanda</string>
+    <string name="password_label">testpass@123!</string>
+    <string name="btn_change_password">Change Password</string>
+    <string name="milestone_level_title">Current Milestone Level</string>
+    <string name="milestone_level_text">Level 3 - Advanced Learner</string>
+    <string name="btn_my_badges">My Badges</string>
+    <string name="btn_view_milestones">View Milestones</string>
+    <string name="motivational_quote">"Education is the passport to the future, for tomorrow belongs to those who prepare for it today." - Malcolm X</string>
+    <string name="btn_view_notes">View Notes</string>
+    <string name="btn_upload_notes">Upload Notes</string>
+
+    <!-- Badges Activity -->
+    <string name="badges_title">My Badges</string>
+    <string name="badges_earned">Badges Earned: %1$d/%2$d</string>
+
+    <!-- Milestones Activity -->
+    <string name="milestones_title">Milestones</string>
+    <string name="current_level">Current Level: %1$d</string>
+    <string name="total_xp">Total XP: %1$s / %2$s</string>
+
+    <!-- Badge Names -->
+    <string name="badge_first_steps">First Steps</string>
+    <string name="badge_quick_learner">Quick Learner</string>
+    <string name="badge_streak_master">Streak Master</string>
+    <string name="badge_quiz_champion">Quiz Champion</string>
+    <string name="badge_perfect_score">Perfect Score</string>
+    <string name="badge_speed_demon">Speed Demon</string>
+    <string name="badge_night_owl">Night Owl</string>
+    <string name="badge_early_bird">Early Bird</string>
+    <string name="badge_social_learner">Social Learner</string>
+    <string name="badge_dedicated">Dedicated</string>
+    <string name="badge_explorer">Explorer</string>
+    <string name="badge_master">Master</string>
+
+    <!-- Badge Descriptions -->
+    <string name="badge_first_steps_desc">Complete your first lesson</string>
+    <string name="badge_quick_learner_desc">Complete 5 lessons in a day</string>
+    <string name="badge_streak_master_desc">Maintain a 7-day learning streak</string>
+    <string name="badge_quiz_champion_desc">Score 100% on 3 quizzes</string>
+    <string name="badge_perfect_score_desc">Get 100% on 10 quizzes</string>
+    <string name="badge_speed_demon_desc">Complete a lesson in under 5 minutes</string>
+    <string name="badge_night_owl_desc">Study after 10 PM</string>
+    <string name="badge_early_bird_desc">Study before 6 AM</string>
+    <string name="badge_social_learner_desc">Share your progress 5 times</string>
+    <string name="badge_dedicated_desc">Study for 30 consecutive days</string>
+    <string name="badge_explorer_desc">Try all available games</string>
+    <string name="badge_master_desc">Complete all courses</string>
+
+    <!-- Milestone Names -->
+    <string name="milestone_beginner">Beginner</string>
+    <string name="milestone_getting_started">Getting Started</string>
+    <string name="milestone_regular_learner">Regular Learner</string>
+    <string name="milestone_dedicated_student">Dedicated Student</string>
+    <string name="milestone_advanced_learner">Advanced Learner</string>
+    <string name="milestone_expert_student">Expert Student</string>
+    <string name="milestone_master_learner">Master Learner</string>
+    <string name="milestone_learning_legend">Learning Legend</string>
+    <string name="milestone_knowledge_seeker">Knowledge Seeker</string>
+    <string name="milestone_quiz_master">Quiz Master</string>
+
+    <!-- Milestone Descriptions -->
+    <string name="milestone_beginner_desc">Complete your first lesson</string>
+    <string name="milestone_getting_started_desc">Complete 5 lessons</string>
+    <string name="milestone_regular_learner_desc">Complete 10 lessons</string>
+    <string name="milestone_dedicated_student_desc">Complete 25 lessons</string>
+    <string name="milestone_advanced_learner_desc">Complete 50 lessons</string>
+    <string name="milestone_expert_student_desc">Complete 100 lessons</string>
+    <string name="milestone_master_learner_desc">Complete 200 lessons</string>
+    <string name="milestone_learning_legend_desc">Complete 500 lessons</string>
+    <string name="milestone_knowledge_seeker_desc">Score 90%+ on 10 quizzes</string>
+    <string name="milestone_quiz_master_desc">Score 100% on 5 quizzes</string>
+
+    <!-- Status -->
+    <string name="status_completed">Completed</string>
+    <string name="status_in_progress">In Progress</string>
+    <string name="status_locked">Locked</string>
+
+    <!--General-->
+    <string name="cancel_button">Cancel Button</string>
+    <string name="headingMain">Games</string>
+    <string name="descriptionMain">Select a game to play.</string>
+    <string name="gameQuote">Did you know that educational games boost problem-solving skills, improve knowledge retention and increase engagement in learning?</string>
+    <string name="definitionBuilder">Definition Builder</string>
+    <string name="matchingGame">Matching Game</string>
+    <string name="crossword">Crossword</string>
+    <string name="check_button">Check</string>
+    <string name="defaultTime">00:00</string>
+    <string name="informationHelper">
+        Creating your notes is easy! Just follow these steps:\n
+        \n
+        1) Create a pdf document with your notes. Your notes must be in the format:\n
+          <i>term</i>:<i>definition</i>;\n
+             (For example: Learn:To gain or acquire knowledge;)\n
+        \n
+        2) The name of your pdf document will be used as the name of your course.\n
+        \n
+        2) Load the pdf document onto your phone.\n
+        \n
+        3) Press the "Get PDF" button.\n
+        \n
+        4) Locate and select your pdf file.\n
+        \n
+        5) Your notes have been loaded into the app! You can now play the games and learn in a more fun way!
+    </string>
+
+    <!--Matching Game-->
+    <string name="headingMG">Matching Game</string>
+    <string name="descriptionMG">Match the appropriate term with the correct definition.</string>
+    <string name="MG_term">Term</string>
+    <string name="MG_definition">Definition</string>
+
+    <!--Definition Builder-->
+    <string name="headingDB">Definition Builder</string>
+    <string name="descriptionDB">Complete the definition by placing the missing words in the correct empty spaces.</string>
+    <string name="defaultTerm">Term to Define</string>
+
+    <!--Crossword-->
+    <string name="headingCrossword">Crossword</string>
+    <string name="descriptionCrossword">Fill in the blocks with the correct words.</string>
+    <string name="clueAcross">Across</string>
+    <string name="clueDown">Down</string>
+
+    <string name="admin_login">Admin Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="navigation_drawer_open" />
+    <string name="navigation_drawer_close" />
+    <string name="access_your_admin_dashboard">Access your admin dashboard</string>
+    <string name="adminlogin">Admin Login</string>
+    <string name="mail">Email</string>
+    <string name="back_to_student_app">Back to Student App</string>
+    <string name="forgotpassword">Forgot Password?</string>
+    <string name="btnlogin">Login</string>
+    <string name="pass_word">Password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="mails">Email</string>
+    <string name="happens_to_the_best_of_us_nwe_ll_help_you_reset_it_nplease_enter_your_email_to_reset_your_password">Happens to the best of us!\nWe\'ll help you reset it.\nPlease enter your email to reset your password.</string>
+    <string name="forgot_your_password">Forgot your Password?</string>
+    <string name="haven_t_received_an_email_resend_email">Haven\'t received an email? Resend email</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="we_sent_a_reset_link_to_email_example_com_nonce_you_ve_reset_your_password_you_can_log_in_again">We sent a reset link to email@example.com.\nOnce you\'ve reset your password, you can log in again.</string>
+    <string name="check_your_email">Check your email</string>
+</resources>

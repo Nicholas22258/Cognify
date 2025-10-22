@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Cognify" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Cognify" parent="Base.Theme.Cognify" />
+
+    <style name="CrosswordCell" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/cw_cell_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">textCapCharacters</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>

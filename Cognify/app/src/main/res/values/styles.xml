@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    <!-- Style for the day-of-the-week circles (M, T, W...) -->
+    <style name="DayCircle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/day_circle_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- Style for the game and course cards (the container) -->
+    <style name="GameCard" >
+        <item name="android:layout_width">130dp</item>
+        <item name="android:layout_height">130dp</item>
+        <item name="android:background">@drawable/game_card_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Style for the icon inside a game card -->
+    <style name="GameCardIcon" >
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <!-- Style for the icon inside a course card (slightly different size) -->
+    <style name="CourseCardIcon" >
+        <item name="android:layout_width">58dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <!-- Style for the text label inside a game or course card -->
+    <style name="GameCardText" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+</resources>
