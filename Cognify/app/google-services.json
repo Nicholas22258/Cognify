@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "319890293763",
+    "project_id": "gamification-b2f13",
+    "storage_bucket": "gamification-b2f13.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319890293763:android:9fa00940180b9331e93a36",
+        "android_client_info": {
+          "package_name": "com.example.cognify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCai2cljEJOBWorpIdwWs3VJH_1KcxIELs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
