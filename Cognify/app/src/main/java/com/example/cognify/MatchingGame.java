@@ -396,7 +396,7 @@ public class MatchingGame extends AppCompatActivity {
     * */
     private void newLevel(){
         if (numLevelsSofar == 5){//3)
-            pb.incrementProgressBy(25);
+//            pb.incrementProgressBy(25);
             endGame();
 //            Toast.makeText(this, "End of game!", Toast.LENGTH_SHORT).show();
             return;
@@ -404,16 +404,25 @@ public class MatchingGame extends AppCompatActivity {
 
         numCorrectAnswers = 0;//1)
         numLevelsSofar++;
-        switch (numLevelsSofar){
-            case 1:{
-                pb.incrementProgressBy(25);
-                break;
-            }
-            case 2:{
-                pb.incrementProgressBy(50);
-                break;
-            }
-        }
+        pb.incrementProgressBy(20);
+//        switch (numLevelsSofar){
+//            case 1:{
+//                pb.incrementProgressBy(10);
+//            }
+//            case 2:{
+//                pb.incrementProgressBy(20);
+//            }
+//            case 3:{
+//                pb.incrementProgressBy(20);
+//            }
+//            case 4:{
+//                pb.incrementProgressBy(25);
+//            }
+//            case 5:{
+//                pb.incrementProgressBy(25);
+//            }
+//
+//        }
 
 //        pb.incrementProgressBy(50);
 
@@ -665,33 +674,6 @@ public class MatchingGame extends AppCompatActivity {
     private boolean isEndOfLevel(){
         return numCorrectAnswers == 5;
     }
-
-//    public void onBackPressedDispatcher() {
-//        // Prevent going back during the game
-//        new AlertDialog.Builder(this)
-//                .setTitle("Exit Game")
-//                .setMessage("Are you sure you want to exit? Your progress will be lost.")
-//                .setPositiveButton("Yes", (dialog, which) -> {
-//                    stopStopwatch();
-//                    super.onBackPressed();
-//                })
-//                .setNegativeButton("No", null)
-//                .show();
-//    }
-
-//    @Override
-//    public void onBackPressed() {
-//        // Prevent going back during the game
-//        new AlertDialog.Builder(this)
-//                .setTitle("Exit Game")
-//                .setMessage("Are you sure you want to exit? Your progress will be lost.")
-//                .setPositiveButton("Yes", (dialog, which) -> {
-//                    stopStopwatch();
-//                    super.onBackPressed();
-//                })
-//                .setNegativeButton("No", null)
-//                .show();
-//    }
 
     @Override
     protected void onDestroy(){
