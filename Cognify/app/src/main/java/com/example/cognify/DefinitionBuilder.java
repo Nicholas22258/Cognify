@@ -379,16 +379,17 @@ public class DefinitionBuilder extends AppCompatActivity {
             //2)
             //2.1)
             numLevels++;
-            switch (numLevels){
-                case 1:{
-                    pb.incrementProgressBy(25);
-                    break;
-                }
-                case 2:{
-                    pb.incrementProgressBy(50);
-                    break;
-                }
-            }
+            pb.incrementProgressBy(20);
+//            switch (numLevels){
+//                case 1:{
+//                    pb.incrementProgressBy(25);
+//                    break;
+//                }
+//                case 2:{
+//                    pb.incrementProgressBy(50);
+//                    break;
+//                }
+//            }
 //            pb.incrementProgressBy(50);
             //2.2)
             currentTAndD = null;
@@ -420,27 +421,27 @@ public class DefinitionBuilder extends AppCompatActivity {
     * If 5 levels have been played, then it will mark the end of the game
     * */
     private boolean endOfGame(){
-        if (numLevels == 5){
+        if (numLevels <= 5){
+//            switch (numLevels){
+//                case 1:{
+//                    pb.incrementProgressBy(10);
+//                }
+//                case 2:{
+//                    pb.incrementProgressBy(20);
+//                }
+//                case 3:{
+//                    pb.incrementProgressBy(20);
+//                }
+//                case 4:{
+//                    pb.incrementProgressBy(25);
+//                }
+//                case 5:{
+//                    pb.incrementProgressBy(25);
+//                }
+//            }
             return true;//not end of game
         }else{
-            switch (numLevels){
-                case 1:{
-                    pb.incrementProgressBy(10);
-                }
-                case 2:{
-                    pb.incrementProgressBy(20);
-                }
-                case 3:{
-                    pb.incrementProgressBy(20);
-                }
-                case 4:{
-                    pb.incrementProgressBy(25);
-                }
-                case 5:{
-                    pb.incrementProgressBy(25);
-                }
 
-            }
 //            pb.incrementProgressBy(25);
             endGame();
             return false;//is end of game
