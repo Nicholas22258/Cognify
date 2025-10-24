@@ -44,7 +44,7 @@
             android:name=".DefinitionBuilder"
             android:exported="false" />
         <activity
-            android:name=".IntroductionActivity"
+            android:name=".ReportsActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -97,5 +97,6 @@
             <!-- </intent-filter> -->
 
     </application>
+
 
 </manifest>
