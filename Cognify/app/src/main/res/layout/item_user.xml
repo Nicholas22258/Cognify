@@ -220,6 +220,16 @@
                 android:text="Suspend"
                 android:textSize="12sp"
                 android:backgroundTint="#F44336" />
+
+            <!-- Make Admin Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/makeAdminButton"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Make Admin"
+                android:textSize="12sp"
+                android:backgroundTint="#FFC107" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

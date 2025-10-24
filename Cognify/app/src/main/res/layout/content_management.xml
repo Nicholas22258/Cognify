@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--
-- @Author Nicholas Leong        EDUV4551823
-- @Author Aarya Manowah         be.2023.q4t9k6
-- @Author Nyasha Masket 		BE.2023.R3M0Y0
-- @Author Sakhile Lesedi Mnisi 	BE.2022.j9f3j4
-- @Author Dominic Newton 		EDUV4818782
-- @Author Kimberly Sean Sibanda EDUV4818746
--
-- Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
--->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
