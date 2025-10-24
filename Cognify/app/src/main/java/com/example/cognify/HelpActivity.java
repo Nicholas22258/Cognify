@@ -1,5 +1,6 @@
 package com.example.cognify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -58,12 +60,37 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
 
-        // --- BottomNavigationView stays exactly as you had it ---
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_settings);
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            // **Your existing code remains exactly unchanged**
-            return true;
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
+                if (item.getItemId() == R.id.nav_home) {
+                    // Already on home page, do nothing or refresh
+
+                    startActivity(new Intent(HelpActivity.this, HomePage.class));
+                    return true;
+                } else if (item.getItemId() == R.id.nav_books) {
+                    // Navigate to Books Activity
+                    startActivity(new Intent(HelpActivity.this, AddAndViewInformation.class));
+//                    Toast.makeText(HomePage.this, "Books (Not Implemented)", Toast.LENGTH_SHORT).show(); // Example toast
+                    return true;
+                } else if (item.getItemId() == R.id.nav_profile) {
+                    // Navigate to Profile Activity
+                    startActivity(new Intent(HelpActivity.this, ProfileActivity.class));
+                    return true;
+                } else if (item.getItemId() == R.id.nav_games) {
+                    // Navigate to Games Activity
+                    startActivity(new Intent(HelpActivity.this, GamesScreen.class));
+                    return true;
+                } else if (item.getItemId() == R.id.nav_settings) {
+                    // Navigate to Settings Activity
+                    Toast.makeText(HelpActivity.this, "Home Page", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         });
     }
 
