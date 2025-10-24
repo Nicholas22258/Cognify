@@ -35,11 +35,9 @@ import java.util.Calendar;
 public class HomePage extends AppCompatActivity {
 
     // Declare views as class members for easy access
-    private ImageView ivProfilePicture;
-    private TextView tvHello;
+//    private ImageView ivProfilePicture;
     private TextView tvName;
-    private ImageView ivBellIcon;
-    private ImageView ivMenuIcon;
+
     private TextView tvStreakCountMG;
     private TextView tvStreakCountDB;
     private TextView tvStreakCountCR;
@@ -50,12 +48,6 @@ public class HomePage extends AppCompatActivity {
     private LinearLayout llDefinitionBuilder;
 
     private LinearLayout llCrossword;
-
-    private LinearLayout llCourse1;
-
-    private LinearLayout llCourse2;
-
-    private LinearLayout llCourse3;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -69,11 +61,9 @@ public class HomePage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         // Find views by ID
-        ivProfilePicture = findViewById(R.id.ivProfilePicture);
-        tvHello = findViewById(R.id.tvHello);
+//        ivProfilePicture = findViewById(R.id.ivProfilePicture);
         tvName = findViewById(R.id.tvName);
-        ivBellIcon = findViewById(R.id.ivBellIcon);
-        ivMenuIcon = findViewById(R.id.ivMenuIcon);
+
         tvStreakCountMG = findViewById(R.id.tvStreakCountMG);
         tvStreakCountDB = findViewById(R.id.tvStreakCountDB);
         tvStreakCountCR = findViewById(R.id.tvStreakCountCR);
@@ -83,18 +73,8 @@ public class HomePage extends AppCompatActivity {
         llDefinitionBuilder = findViewById(R.id.llDefinitionBuilder);  // Add ID
         llCrossword = findViewById(R.id.llCrossword);  // Add ID
 
-        llCourse1 = findViewById(R.id.llCourse1);  // Add ID in XML for this
-        llCourse2 = findViewById(R.id.llCourse2);  // Add ID
-        llCourse3 = findViewById(R.id.llCourse3);  // Add ID
-
         llDayCircles = findViewById(R.id.llDayCircles);
-        // Set dynamic data (e.g., from SharedPreferences or API)
-        // For example:
 
-//        String userName = "Kimberly";  // Fetch from data source
-//        int streakCount = 11;  // Fetch from data source
-//        tvName.setText(userName);
-//        tvStreakCount.setText(String.valueOf(streakCount));
         getUserDetails();
         setOnClickListeners();
         highlightStreak();
@@ -134,31 +114,8 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
-
-
     private void setOnClickListeners() {
         // Set click listeners
-        ivBellIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle Bell Icon click (e.g., open notifications)
-                Toast.makeText(HomePage.this, "Opening Notifications", Toast.LENGTH_SHORT).show();
-                // You could start a new activity or fragment here
-                // Intent intent = new Intent(HomePage.this, NotificationsActivity.class);
-                // startActivity(intent);
-            }
-        });
-
-        ivMenuIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle Menu Icon click (e.g., open a drawer or menu)
-                Toast.makeText(HomePage.this, "Opening Menu", Toast.LENGTH_SHORT).show();
-                // If you have a DrawerLayout, use:
-                // DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-                // drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
 
         // Set click listeners for game cards
         llMatchingGame.setOnClickListener(new View.OnClickListener() {
@@ -188,30 +145,6 @@ public class HomePage extends AppCompatActivity {
                 Toast.makeText(HomePage.this, "Starting Word Master", Toast.LENGTH_SHORT).show();
                 // Intent intent = new Intent(HomePage.this, WordMasterActivity.class);
                 // startActivity(intent);
-            }
-        });
-
-        // Set click listeners for course cards (they say "Coming Soon")
-        llCourse1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle Course 1 click
-                Toast.makeText(HomePage.this, "Course 1: Coming Soon", Toast.LENGTH_SHORT).show();
-                // You could show a dialog or navigate if available
-            }
-        });
-
-        llCourse2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomePage.this, "Course 2: Coming Soon", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        llCourse3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomePage.this, "Course 3: Coming Soon", Toast.LENGTH_SHORT).show();
             }
         });
     }
