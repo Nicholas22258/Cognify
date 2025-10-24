@@ -1,23 +1,13 @@
 package com.example.cognify;
 
-/*
- * @Author Nicholas Leong        EDUV4551823
- * @Author Aarya Manowah         be.2023.q4t9k6
- * @Author Nyasha Masket        BE.2023.R3M0Y0
- * @Author Sakhile Lesedi Mnisi  BE.2022.j9f3j4
- * @Author Dominic Newton       EDUV4818782
- * @Author Kimberly Sean Sibanda EDUV4818746
- *
- * Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
- * */
 
+import com.google.firebase.Timestamp;
 import java.util.Date;
 
 public class User {
     private String userId;
     private String username;
     private String email;
-    private String profilePicUrl;
     private Date joinDate;
     private boolean isActive;
     private boolean isAdmin;
@@ -31,13 +21,13 @@ public class User {
     }
 
     // Constructor with parameters
-    public User(String userId, String username, String email, String profilePicUrl,
-                Date joinDate, boolean isActive, boolean isAdmin,
+    public User(String userId, String username, String email,
+                Date joinDate, Boolean isActive, boolean isAdmin,
                 int totalMaterialsUploaded, int totalGamesPlayed, int totalPoints, Date lastActive) {
         this.userId = userId;
         this.username = username;
         this.email = email;
-        this.profilePicUrl = profilePicUrl;
+
         this.joinDate = joinDate;
         this.isActive = isActive;
         this.isAdmin = isAdmin;
@@ -72,14 +62,6 @@ public class User {
         this.email = email;
     }
 
-    public String getProfilePicUrl() {
-        return profilePicUrl;
-    }
-
-    public void setProfilePicUrl(String profilePicUrl) {
-        this.profilePicUrl = profilePicUrl;
-    }
-
     public Date getJoinDate() {
         return joinDate;
     }
@@ -88,22 +70,21 @@ public class User {
         this.joinDate = joinDate;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
     public void setActive(boolean active) {
         isActive = active;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
     }
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
     public int getTotalMaterialsUploaded() {
         return totalMaterialsUploaded;
     }
@@ -142,7 +123,6 @@ public class User {
                 "userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", profilePicUrl='" + profilePicUrl + '\'' +
                 ", joinDate=" + joinDate +
                 ", isActive=" + isActive +
                 ", isAdmin=" + isAdmin +

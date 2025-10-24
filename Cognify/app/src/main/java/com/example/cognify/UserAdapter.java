@@ -1,17 +1,5 @@
 package com.example.cognify;
 
-/*
- * @Author Nicholas Leong        EDUV4551823
- * @Author Aarya Manowah         be.2023.q4t9k6
- * @Author Nyasha Masket        BE.2023.R3M0Y0
- * @Author Sakhile Lesedi Mnisi  BE.2022.j9f3j4
- * @Author Dominic Newton       EDUV4818782
- * @Author Kimberly Sean Sibanda EDUV4818746
- *
- * Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
- * */
-
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +29,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         void onViewDetails(User user);
         void onSuspendUser(User user);
         void onActivateUser(User user);
+        void onMakeAdmin(User user); // New callback
     }
 
     // Constructor
@@ -80,51 +69,47 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         // Set status badge and button based on user status
         if (user.isAdmin()) {
-            // Admin users
             holder.statusBadge.setText("Admin");
             holder.statusBadge.setBackgroundResource(R.drawable.badge_admin);
-            holder.suspendButton.setVisibility(View.GONE); // Don't allow suspending admins
+            holder.suspendButton.setVisibility(View.GONE);
+            holder.makeAdminButton.setVisibility(View.GONE); // Hide Make Admin for admins
         } else if (user.isActive()) {
-            // Active users
             holder.statusBadge.setText("Active");
             holder.statusBadge.setBackgroundResource(R.drawable.badge_active);
             holder.suspendButton.setText("Suspend");
             holder.suspendButton.setVisibility(View.VISIBLE);
             holder.suspendButton.setBackgroundTintList(
                     context.getResources().getColorStateList(android.R.color.holo_red_dark));
+            holder.makeAdminButton.setVisibility(View.VISIBLE);
         } else {
-            // Suspended users
-            holder.statusBadge.setText("Suspended");
+            holder.statusBadge.setText("Inactive");
             holder.statusBadge.setBackgroundResource(R.drawable.badges_suspended);
             holder.suspendButton.setText("Activate");
             holder.suspendButton.setVisibility(View.VISIBLE);
             holder.suspendButton.setBackgroundTintList(
                     context.getResources().getColorStateList(android.R.color.holo_green_dark));
+            holder.makeAdminButton.setVisibility(View.VISIBLE);
         }
 
-        // View Details button click listener
+        // Button click listeners
         holder.viewDetailsButton.setOnClickListener(v -> {
+            if (listener != null) listener.onViewDetails(user);
+        });
+
+        holder.suspendButton.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onViewDetails(user);
+                if (user.isActive()) listener.onSuspendUser(user);
+                else listener.onActivateUser(user);
             }
         });
 
-        // Suspend/Activate button click listener
-        holder.suspendButton.setOnClickListener(v -> {
-            if (listener != null) {
-                if (user.isActive()) {
-                    listener.onSuspendUser(user);
-                } else {
-                    listener.onActivateUser(user);
-                }
-            }
+        holder.makeAdminButton.setOnClickListener(v -> {
+            if (listener != null) listener.onMakeAdmin(user);
         });
 
         // Card click listener for viewing details
         holder.userCard.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onViewDetails(user);
-            }
+            if (listener != null) listener.onViewDetails(user);
         });
     }
 
@@ -140,12 +125,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         TextView userNameText, userEmailText, joinDateText;
         TextView statusBadge;
         TextView materialsUploadedText, gamesPlayedText, totalPointsText;
-        MaterialButton viewDetailsButton, suspendButton;
+        MaterialButton viewDetailsButton, suspendButton, makeAdminButton;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            // Initialize all views
             userCard = itemView.findViewById(R.id.userCard);
             userProfileImage = itemView.findViewById(R.id.userProfileImage);
             userNameText = itemView.findViewById(R.id.userNameText);
@@ -157,12 +140,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             totalPointsText = itemView.findViewById(R.id.totalPointsText);
             viewDetailsButton = itemView.findViewById(R.id.viewDetailsButton);
             suspendButton = itemView.findViewById(R.id.suspendButton);
+            makeAdminButton = itemView.findViewById(R.id.makeAdminButton); // new
         }
     }
 
     // Method to update the list
     public void updateList(List<User> newList) {
-        this.userList = newList;
+        this.userList.clear();
+        this.userList.addAll(newList);
         notifyDataSetChanged();
     }
 }

@@ -1,16 +1,5 @@
 package com.example.cognify;
 
-/*
- * @Author Nicholas Leong        EDUV4551823
- * @Author Aarya Manowah         be.2023.q4t9k6
- * @Author Nyasha Masket        BE.2023.R3M0Y0
- * @Author Sakhile Lesedi Mnisi  BE.2022.j9f3j4
- * @Author Dominic Newton       EDUV4818782
- * @Author Kimberly Sean Sibanda EDUV4818746
- *
- * Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
- * */
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -109,7 +98,8 @@ public class UserManagementActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
         usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        userAdapter = new UserAdapter(this, filteredUserList, new UserAdapter.OnUserActionListener() {
+
+        userAdapter = new UserAdapter(this, new ArrayList<>(), new UserAdapter.OnUserActionListener() {
             @Override
             public void onViewDetails(User user) {
                 viewUserDetails(user);
@@ -124,9 +114,35 @@ public class UserManagementActivity extends AppCompatActivity {
             public void onActivateUser(User user) {
                 activateUser(user);
             }
+
+            @Override
+            public void onMakeAdmin(User user) {
+                new AlertDialog.Builder(UserManagementActivity.this)
+                        .setTitle("Make Admin")
+                        .setMessage("Are you sure you want to make " + user.getUsername() + " an admin?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            db.collection("users").document(user.getUserId())
+                                    .update("isAdmin", true)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(UserManagementActivity.this,
+                                                user.getUsername() + " is now an admin!",
+                                                Toast.LENGTH_SHORT).show();
+                                        loadUsers(); // Refresh the list after updating Firestore
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(UserManagementActivity.this,
+                                                "Failed to update user: " + e.getMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    });
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
         });
+
         usersRecyclerView.setAdapter(userAdapter);
     }
+
 
     private void setupListeners() {
         // Search functionality
@@ -180,8 +196,26 @@ public class UserManagementActivity extends AppCompatActivity {
                     userList.clear();
 
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        // ADD THIS - Log raw Firestore data BEFORE converting to User object
+                        if (document.getId().equals("gamifying52@gmail.com") ||
+                                document.getString("email").equals("gamifying52@gmail.com")) {
+                            android.util.Log.d("UserManagement", "=== RAW FIRESTORE DATA for gamifying52 ===");
+                            android.util.Log.d("UserManagement", "Document ID: " + document.getId());
+                            android.util.Log.d("UserManagement", "All data: " + document.getData());
+                            android.util.Log.d("UserManagement", "isAdmin field: " + document.get("isAdmin"));
+                            android.util.Log.d("UserManagement", "isActive field: " + document.get("isActive"));
+                        }
+
                         User user = document.toObject(User.class);
                         user.setUserId(document.getId());
+
+                        // Log after conversion
+                        if (user.getEmail() != null && user.getEmail().equals("gamifying52@gmail.com")) {
+                            android.util.Log.d("UserManagement", "=== AFTER CONVERSION ===");
+                            android.util.Log.d("UserManagement", "user.isAdmin(): " + user.isAdmin());
+                            android.util.Log.d("UserManagement", "user.isActive(): " + user.isActive());
+                        }
+
                         userList.add(user);
                     }
 
@@ -200,6 +234,9 @@ public class UserManagementActivity extends AppCompatActivity {
     private void filterUsers() {
         filteredUserList.clear();
 
+        // ADD THIS LOG
+        android.util.Log.d("UserManagement", "=== Filtering with: " + currentFilter + " ===");
+
         for (User user : userList) {
             boolean matchesFilter = false;
             boolean matchesSearch = false;
@@ -217,6 +254,9 @@ public class UserManagementActivity extends AppCompatActivity {
                     break;
                 case "admins":
                     matchesFilter = user.isAdmin();
+
+                    android.util.Log.d("UserManagement", "User: " + user.getUsername() +
+                            ", isAdmin: " + user.isAdmin() + ", matches: " + matchesFilter);
                     break;
             }
 
@@ -234,7 +274,11 @@ public class UserManagementActivity extends AppCompatActivity {
             }
         }
 
-        userAdapter.notifyDataSetChanged();
+        // ADD THIS LOG
+        android.util.Log.d("UserManagement", "Total users in list: " + userList.size());
+        android.util.Log.d("UserManagement", "Filtered users: " + filteredUserList.size());
+
+        userAdapter.updateList(filteredUserList);
         updateUserCount();
 
         if (filteredUserList.isEmpty()) {
@@ -245,7 +289,6 @@ public class UserManagementActivity extends AppCompatActivity {
             usersRecyclerView.setVisibility(View.VISIBLE);
         }
     }
-
     private void updateUserCount() {
         userCountText.setText("Total: " + filteredUserList.size() + " users");
     }

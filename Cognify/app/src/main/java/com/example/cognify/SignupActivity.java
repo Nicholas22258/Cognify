@@ -116,7 +116,6 @@ public class SignupActivity extends AppCompatActivity {
         userMap.put("userId", userId);
         userMap.put("username", username);
         userMap.put("email", email);
-        userMap.put("profilePicUrl", "");
         userMap.put("joinDate", new Date());
         userMap.put("isActive", true);
         userMap.put("isAdmin", false);
@@ -124,7 +123,6 @@ public class SignupActivity extends AppCompatActivity {
         userMap.put("totalGamesPlayed", 0);
         userMap.put("totalPoints", 0);
         userMap.put("lastActive", new Date());
-        userMap.put("createdAt", System.currentTimeMillis());
 //password is not stored as it is handled by Firebase authentication
 
         db.collection("users").document(userId)

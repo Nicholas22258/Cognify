@@ -40,7 +40,8 @@ public class ProfileActivity extends AppCompatActivity {
     private Button milestonesButton;
     private Button changePasswordButton;
 
-    private Button btnBackToHomeage;
+    private Button btnBackToHomepage;
+    private Button logOut;
 
     private Button addAndViewInformation;
     private ImageView passwordVisibilityToggle;
@@ -142,6 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast.makeText(this, "Failed to delete user data", Toast.LENGTH_SHORT).show();
                 });
     }
+
     private void initializeViews() {
         usernameText = findViewById(R.id.tv_username);
         passwordText = findViewById(R.id.tv_password);
@@ -153,7 +155,8 @@ public class ProfileActivity extends AppCompatActivity {
         changePasswordButton = findViewById(R.id.btn_change_password);
         passwordVisibilityToggle = findViewById(R.id.iv_password_visibility);
         addAndViewInformation = findViewById(R.id.btnAddViewNotes);
-        btnBackToHomeage = findViewById(R.id.btnBackToHomeage);
+        btnBackToHomepage = findViewById(R.id.btnBackToHomeage);
+        logOut = findViewById(R.id.btnLogOut);
     }
 
     private void setupClickListeners() {
@@ -198,10 +201,19 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        btnBackToHomeage.setOnClickListener(new View.OnClickListener() {
+        btnBackToHomepage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, HomePage.class);
+                startActivity(intent);
+            }
+        });
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

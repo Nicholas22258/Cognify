@@ -14,13 +14,19 @@ package com.example.cognify;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
@@ -28,14 +34,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import android.view.MenuItem;
-import android.view.View;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 
 public class AdminDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -261,7 +264,7 @@ public class AdminDashboardActivity extends AppCompatActivity
                 // TODO: Create ReportsActivity
                 Toast.makeText(AdminDashboardActivity.this,
                         "Reports - Coming Soon", Toast.LENGTH_SHORT).show();
-                // startActivity(new Intent(AdminDashboardActivity.this, ReportsActivity.class));
+                startActivity(new Intent(AdminDashboardActivity.this, ReportsActivity.class));
             }
         });
     }
@@ -284,7 +287,7 @@ public class AdminDashboardActivity extends AppCompatActivity
             // startActivity(new Intent(this, GameAnalyticsActivity.class));
         } else if (id == R.id.nav_reports) {
             Toast.makeText(this, "Reports - Coming Soon", Toast.LENGTH_SHORT).show();
-            // startActivity(new Intent(this, ReportsActivity.class));
+            startActivity(new Intent(this, ReportsActivity.class));
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings - Coming Soon", Toast.LENGTH_SHORT).show();
             // startActivity(new Intent(this, SettingsActivity.class));
@@ -302,7 +305,7 @@ public class AdminDashboardActivity extends AppCompatActivity
                 .setMessage("Are you sure you want to logout?")
                 .setPositiveButton("Yes", (dialog, which) -> {
                     mAuth.signOut();
-                    Intent intent = new Intent(AdminDashboardActivity.this, GamesScreen.class);
+                    Intent intent = new Intent(AdminDashboardActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
