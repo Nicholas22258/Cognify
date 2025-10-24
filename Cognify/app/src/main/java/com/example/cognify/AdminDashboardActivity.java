@@ -261,9 +261,6 @@ public class AdminDashboardActivity extends AppCompatActivity
         reportsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Create ReportsActivity
-                Toast.makeText(AdminDashboardActivity.this,
-                        "Reports - Coming Soon", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(AdminDashboardActivity.this, ReportsActivity.class));
             }
         });
@@ -286,7 +283,7 @@ public class AdminDashboardActivity extends AppCompatActivity
             Toast.makeText(this, "Game Analytics - Coming Soon", Toast.LENGTH_SHORT).show();
             // startActivity(new Intent(this, GameAnalyticsActivity.class));
         } else if (id == R.id.nav_reports) {
-            //Toast.makeText(this, "Reports - Coming Soon", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Reports - Coming Soon", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, ReportsActivity.class));
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings - Coming Soon", Toast.LENGTH_SHORT).show();
@@ -337,5 +334,4 @@ public class AdminDashboardActivity extends AppCompatActivity
         // Refresh statistics when returning to dashboard
         loadDashboardStatistics();
     }
-
 }
