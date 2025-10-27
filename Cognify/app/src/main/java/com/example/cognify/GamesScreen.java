@@ -10,6 +10,7 @@ package com.example.cognify;
  *
  * Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
  * */
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -28,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,6 +40,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class GamesScreen extends AppCompatActivity {
+    private PdfLoader pdfLoader;
 
     private ImageButton goToMatchingGame;
     private ImageButton goToDefinitionBuilder;
@@ -46,11 +49,10 @@ public class GamesScreen extends AppCompatActivity {
     private ProgressBar loadingProgressBar;
     private boolean dataLoaded = true;
 
-    private ImageView backArrow;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         EdgeToEdge.enable(this);
         setContentView(R.layout.games_screen);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -58,12 +60,13 @@ public class GamesScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
-//        TermsAndDefinitions.loadDummyTsAndDs();
+
+        pdfLoader = new PdfLoader();
+
         goToMatchingGame = findViewById(R.id.matchingGame);
         goToDefinitionBuilder = findViewById(R.id.definitionBuilder);
         goToCrossword = findViewById(R.id.crossword);
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
-//        backArrow = findViewById(R.id.back_arrow);
 
         disableGameButtons();
         if (loadingProgressBar != null) {
@@ -76,15 +79,6 @@ public class GamesScreen extends AppCompatActivity {
             Toast.makeText(this, "Please select a course to start", Toast.LENGTH_LONG).show();
         }
 
-//        backArrow.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(GamesScreen.this, HomePage.class);
-//                startActivity(intent);
-//            }
-//        });
-
-        // Set up click listeners (they won't work until buttons are enabled)
         goToMatchingGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,67 +155,93 @@ public class GamesScreen extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // Load data when returning from AddAndViewInformation activity
-        loadLastSelectedPdf();
-    }
-
-    private void loadLastSelectedPdf() {
-        SharedPreferences settings = getSharedPreferences(AddAndViewInformation.PREFS_NAME, 0);
-        String uriString = settings.getString(AddAndViewInformation.PREF_LAST_SELECTED_URI, null);
-        String courseName = settings.getString(AddAndViewInformation.PREF_LAST_SELECTED_NAME, null);
-
-        if (uriString != null && courseName != null) {
-            Uri uri = Uri.parse(uriString);
-
-            // Show loading indicator
-            if (loadingProgressBar != null) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-            }
-
-            // Load PDF data in background
-            new Thread(() -> {
-                try {
-                    String textFromPDF = readPdfFromUri(uri);
-                    loadToTsAndDsList(textFromPDF);
-
-                    // Update UI on main thread
-                    runOnUiThread(() -> {
-                        dataLoaded = true;
-                        AddAndViewInformation.courseIsSelected = true;
-                        AddAndViewInformation.courseName = courseName;
-
-                        if (loadingProgressBar != null) {
-                            loadingProgressBar.setVisibility(View.GONE);
-                        }
-
-                        enableGameButtons();
-                        Toast.makeText(GamesScreen.this,
-                                "Loaded: " + courseName + " (" + TermsAndDefinitions.TsAndDs.size() + " terms)",
-                                Toast.LENGTH_SHORT).show();
-                    });
-
-                } catch (IOException | SecurityException e) {
-                    Log.e("MainActivity", "Error loading PDF", e);
-                    runOnUiThread(() -> {
-                        if (loadingProgressBar != null) {
-                            loadingProgressBar.setVisibility(View.GONE);
-                        }
-                        Toast.makeText(GamesScreen.this,
-                                "Failed to load PDF. Please select a course.",
-                                Toast.LENGTH_LONG).show();
-                        disableGameButtons();
-                    });
-                }
-            }).start();
-
-        } else {
-            // No PDF selected yet
-            if (loadingProgressBar != null) {
-                loadingProgressBar.setVisibility(View.GONE);
-            }
-            Toast.makeText(this, "Please select a course to start", Toast.LENGTH_LONG).show();
-            disableGameButtons();
+        if (loadingProgressBar != null) {
+            loadingProgressBar.setVisibility(View.VISIBLE);
         }
+        disableGameButtons();
+
+        pdfLoader.loadLastSelectedPdf(this, new PdfLoader.PdfLoaderListener() {
+            @Override
+            public void onPdfLoaded(String courseName, int termCount) {
+                // This runs on success
+                if (loadingProgressBar != null) {
+                    loadingProgressBar.setVisibility(View.GONE);
+                }
+                enableGameButtons();
+                Toast.makeText(GamesScreen.this,
+                        "Loaded: " + courseName, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPdfLoadFailed(String errorMessage) {
+                // This runs on failure
+                if (loadingProgressBar != null) {
+                    loadingProgressBar.setVisibility(View.GONE);
+                }
+                disableGameButtons();
+                Toast.makeText(GamesScreen.this, errorMessage, Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+//    public void loadLastSelectedPdf() {
+//        SharedPreferences settings = getSharedPreferences(AddAndViewInformation.PREFS_NAME, 0);
+//        String uriString = settings.getString(AddAndViewInformation.PREF_LAST_SELECTED_URI, null);
+//        String courseName = settings.getString(AddAndViewInformation.PREF_LAST_SELECTED_NAME, null);
+//
+//        if (uriString != null && courseName != null) {
+//            Uri uri = Uri.parse(uriString);
+//
+//            // Show loading indicator
+//            if (loadingProgressBar != null) {
+//                loadingProgressBar.setVisibility(View.VISIBLE);
+//            }
+//
+//            // Load PDF data in background
+//            new Thread(() -> {
+//                try {
+//                    String textFromPDF = readPdfFromUri(uri);
+//                    loadToTsAndDsList(textFromPDF);
+//
+//                    // Update UI on main thread
+//                    runOnUiThread(() -> {
+//                        dataLoaded = true;
+//                        AddAndViewInformation.courseIsSelected = true;
+//                        AddAndViewInformation.courseName = courseName;
+//
+//                        if (loadingProgressBar != null) {
+//                            loadingProgressBar.setVisibility(View.GONE);
+//                        }
+//
+//                        enableGameButtons();
+//                        Toast.makeText(GamesScreen.this,
+//                                "Loaded: " + courseName + " (" + TermsAndDefinitions.TsAndDs.size() + " terms)",
+//                                Toast.LENGTH_SHORT).show();
+//                    });
+//
+//                } catch (IOException | SecurityException e) {
+//                    Log.e("LOADING PDF", "Error loading PDF", e);
+//                    runOnUiThread(() -> {
+//                        if (loadingProgressBar != null) {
+//                            loadingProgressBar.setVisibility(View.GONE);
+//                        }
+//                        Toast.makeText(GamesScreen.this,
+//                                "Failed to load PDF. Please select a course.",
+//                                Toast.LENGTH_LONG).show();
+//                        disableGameButtons();
+//                    });
+//                }
+//            }).start();
+//
+//        } else {
+//            // No PDF selected yet
+//            if (loadingProgressBar != null) {
+//                loadingProgressBar.setVisibility(View.GONE);
+//            }
+//            Toast.makeText(this, "Please select a course to start", Toast.LENGTH_LONG).show();
+//            disableGameButtons();
+//        }
+//    }
 
     private String readPdfFromUri(Uri uri) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();

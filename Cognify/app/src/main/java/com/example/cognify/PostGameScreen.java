@@ -214,6 +214,8 @@ public class PostGameScreen extends AppCompatActivity {
     }
 
     private void processUpdates(DocumentSnapshot document) {
+//        boolean pointsUpdatedForSingleGame = false;
+//        boolean totalPointsUpdated = false;
         // Calculate streak update
         long newStreak = calculateStreakValue(document);
 
@@ -237,9 +239,48 @@ public class PostGameScreen extends AppCompatActivity {
                     Toast.makeText(PostGameScreen.this,
                             "Progress saved successfully!", Toast.LENGTH_SHORT).show();
                     enableContinueButton();
+                    updateUserTotalPoints(pointsForCurrentGame, (int) newStreak, (int) updatedTotalPoints);
                 })
                 .addOnFailureListener(e -> {
                     handleUpdateError("Failed to save progress: " + e.getMessage());
+                });
+    }
+
+    private void updateUserTotalPoints(int pointsToAdd, int newStreak, int gameTotalPoints) {
+        String userId = UserDetails.getUserID();
+        if (userId == null) {
+            handleUpdateError("User ID not found");
+            return;
+        }
+
+        DocumentReference userDocRef = db.collection("users").document(userId);
+
+        userDocRef.get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Long currentUserTotalPoints = documentSnapshot.getLong("totalPoints");
+                        if (currentUserTotalPoints == null) {
+                            currentUserTotalPoints = 0L;
+                        }
+                        long updatedUserTotalPoints = currentUserTotalPoints + pointsToAdd;
+
+                        // Update the user document
+                        userDocRef.update("totalPoints", updatedUserTotalPoints)
+                                .addOnSuccessListener(aVoid2 -> {
+                                    updateLocalGameDetailsTracker(playedGame, newStreak, gameTotalPoints);
+                                    Toast.makeText(PostGameScreen.this,
+                                            "Progress saved successfully!", Toast.LENGTH_SHORT).show();
+                                    enableContinueButton();
+                                })
+                                .addOnFailureListener(e -> {
+                                    handleUpdateError("Failed to update user points: " + e.getMessage());
+                                });
+                    } else {
+                        handleUpdateError("User document not found");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    handleUpdateError("Failed to retrieve user data: " + e.getMessage());
                 });
     }
 

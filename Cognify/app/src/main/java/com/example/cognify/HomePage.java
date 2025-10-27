@@ -34,8 +34,7 @@ import java.util.Calendar;
 
 public class HomePage extends AppCompatActivity {
 
-    // Declare views as class members for easy access
-//    private ImageView ivProfilePicture;
+    private PdfLoader pdfLoader;
     private TextView tvName;
 
     private TextView tvStreakCountMG;
@@ -57,6 +56,9 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);  // Link to your XML layout
 
+        pdfLoader = new PdfLoader();
+
+        // Initialize Firebase Authentication and Firestore
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -69,9 +71,9 @@ public class HomePage extends AppCompatActivity {
         tvStreakCountCR = findViewById(R.id.tvStreakCountCR);
 
         // Find game cards (assuming you add IDs in XML)
-        llMatchingGame = findViewById(R.id.llMatchingGame);  // Add ID in XML for this
-        llDefinitionBuilder = findViewById(R.id.llDefinitionBuilder);  // Add ID
-        llCrossword = findViewById(R.id.llCrossword);  // Add ID
+        llMatchingGame = findViewById(R.id.llMatchingGame);
+        llDefinitionBuilder = findViewById(R.id.llDefinitionBuilder);
+        llCrossword = findViewById(R.id.llCrossword);
 
         llDayCircles = findViewById(R.id.llDayCircles);
 
@@ -122,9 +124,24 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle Matching Game click (e.g., start the game)
-                Toast.makeText(HomePage.this, "Starting Matching Game", Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(HomePage.this, MatchingGameActivity.class);
-                // startActivity(intent);
+//                Toast.makeText(HomePage.this, "Starting Matching Game", Toast.LENGTH_SHORT).show();
+//                 GamesScreen gs = new GamesScreen();
+//                 gs.loadLastSelectedPdf();
+//                 Intent intent = new Intent(HomePage.this, MatchingGame.class);
+//                 startActivity(intent);
+
+                pdfLoader.loadLastSelectedPdf(HomePage.this, new PdfLoader.PdfLoaderListener() {
+                    @Override
+                    public void onPdfLoaded(String courseName, int termCount) {
+                        Intent intent = new Intent(HomePage.this, MatchingGame.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onPdfLoadFailed(String errorMessage) {
+                        Toast.makeText(HomePage.this, "Error loading game. Please try from the Games Screen.", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
@@ -132,9 +149,24 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle Definition Builder click
-                Toast.makeText(HomePage.this, "Starting Definition Builder", Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(HomePage.this, DefinitionBuilderActivity.class);
-                // startActivity(intent);
+//                Toast.makeText(HomePage.this, "Starting Definition Builder", Toast.LENGTH_SHORT).show();
+//                GamesScreen gs = new GamesScreen();
+//                gs.loadLastSelectedPdf();
+//                 Intent intent = new Intent(HomePage.this, DefinitionBuilder.class);
+//                 startActivity(intent);
+
+                pdfLoader.loadLastSelectedPdf(HomePage.this, new PdfLoader.PdfLoaderListener() {
+                    @Override
+                    public void onPdfLoaded(String courseName, int termCount) {
+                        Intent intent = new Intent(HomePage.this, DefinitionBuilder.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onPdfLoadFailed(String errorMessage) {
+                        Toast.makeText(HomePage.this, "Error loading game. Please try from the Games Screen.", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
@@ -142,11 +174,28 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle Word Master click
-                Toast.makeText(HomePage.this, "Starting Word Master", Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(HomePage.this, WordMasterActivity.class);
-                // startActivity(intent);
+//                Toast.makeText(HomePage.this, "Starting Word Master", Toast.LENGTH_SHORT).show();
+//                GamesScreen gs = new GamesScreen();
+//                gs.loadLastSelectedPdf(this);
+//                 Intent intent = new Intent(HomePage.this, Crossword.class);
+//                 startActivity(intent);
+
+                pdfLoader.loadLastSelectedPdf(HomePage.this, new PdfLoader.PdfLoaderListener() {
+                    @Override
+                    public void onPdfLoaded(String courseName, int termCount) {
+                        Intent intent = new Intent(HomePage.this, Crossword.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onPdfLoadFailed(String errorMessage) {
+                        Toast.makeText(HomePage.this, "Error loading game. Please try from the Games Screen.", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
+
+
     }
 
     public void getUserDetails() {
