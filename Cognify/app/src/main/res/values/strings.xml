@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Learning App</string>
+    <string name="app_name">Cognify</string>
 
     <!-- Header -->
     <string name="hello">Hello,</string>
