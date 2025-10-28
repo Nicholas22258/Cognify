@@ -12,6 +12,7 @@ package com.example.cognify;
  * */
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class ResetConfirmationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reset_confirmation);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         mAuth = FirebaseAuth.getInstance();
 

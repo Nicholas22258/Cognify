@@ -12,6 +12,7 @@ package com.example.cognify;
  * */
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -58,6 +59,7 @@ public class AdminDashboardActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_dash);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();

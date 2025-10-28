@@ -12,6 +12,7 @@ package com.example.cognify;
  * */
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reset_password);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();

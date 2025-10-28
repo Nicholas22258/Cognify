@@ -12,6 +12,7 @@ package com.example.cognify;
  * */
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,6 +49,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();

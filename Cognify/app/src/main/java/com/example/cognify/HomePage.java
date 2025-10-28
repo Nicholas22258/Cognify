@@ -54,7 +54,8 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);  // Link to your XML layout
+        setContentView(R.layout.activity_home_page);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         pdfLoader = new PdfLoader();
 

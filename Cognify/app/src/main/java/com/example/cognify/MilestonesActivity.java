@@ -11,6 +11,7 @@ package com.example.cognify;
  * Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
  * */
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -57,6 +58,7 @@ public class MilestonesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestones);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         isDestroyed = false;
         initializeViews();

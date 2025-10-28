@@ -12,6 +12,7 @@ package com.example.cognify;
  * */
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ public class BadgesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_badges);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         isDestroyed = false;
         badgeManager = new BadgeManager();
@@ -216,55 +218,7 @@ public class BadgesActivity extends AppCompatActivity {
         return count;
     }
 
-    public boolean hasBadgeRequirementsMet(String badgeName) {
-        switch (badgeName) {
-            case "First Steps":
-                return checkBadgeRequirements(10);
-            case "Quick Learner":
-                return checkBadgeRequirements(100);
-            case "Streak Master":
-                return checkBadgeRequirements(250);
-            case "Quiz Champion":
-                return checkBadgeRequirements(500);
-            case "Perfect Score":
-                return checkBadgeRequirements(1000);
-            case "Speed Demon":
-                return checkBadgeRequirements(1200);
-            case "Night Owl":
-                return checkBadgeRequirements(1500);
-            case "Early Bird":
-                return checkBadgeRequirements(1800);
-            case "Social Learner":
-                return checkBadgeRequirements(2000);
-            case "Dedicated":
-                return checkBadgeRequirements(2500);
-            case "Explorer":
-                return checkBadgeRequirements(2800);
-            case "Master":
-                return checkBadgeRequirements(3000);
-            default:
-                return false;
-        }
-    }
 
-    public List<String> getEarnedBadgeNames() {
-        List<String> earnedBadges = new ArrayList<>();
-
-        if (checkBadgeRequirements(10)) earnedBadges.add("First Steps");
-        if (checkBadgeRequirements(100)) earnedBadges.add("Quick Learner");
-        if (checkBadgeRequirements(250)) earnedBadges.add("Streak Master");
-        if (checkBadgeRequirements(500)) earnedBadges.add("Quiz Champion");
-        if (checkBadgeRequirements(1000)) earnedBadges.add("Perfect Score");
-        if (checkBadgeRequirements(1200)) earnedBadges.add("Speed Demon");
-        if (checkBadgeRequirements(1500)) earnedBadges.add("Night Owl");
-        if (checkBadgeRequirements(1800)) earnedBadges.add("Early Bird");
-        if (checkBadgeRequirements(2000)) earnedBadges.add("Social Learner");
-        if (checkBadgeRequirements(2500)) earnedBadges.add("Dedicated");
-        if (checkBadgeRequirements(2800)) earnedBadges.add("Explorer");
-        if (checkBadgeRequirements(3000)) earnedBadges.add("Master");
-
-        return earnedBadges;
-    }
 
     @Override
     protected void onPause() {

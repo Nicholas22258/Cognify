@@ -13,6 +13,7 @@ package com.example.cognify;
 
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -25,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.net.Uri;
@@ -98,12 +100,15 @@ public class AddAndViewInformation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        getWindow().setStatusBarColor(Color.BLACK);
         setContentView(R.layout.activity_add_and_view_information);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
+//        systemBars.left, systemBars.top, systemBars.right, systemBars.bottom
 
         displayView = findViewById(R.id.displayView);
         getPDFButton = findViewById(R.id.getPDFButton);
@@ -152,8 +157,6 @@ public class AddAndViewInformation extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.nav_books) {
                     // Navigate to Books Activity
-//                    startActivity(new Intent(AddAndViewInformation.this, AddAndViewInformation.class));
-//                    Toast.makeText(HomePage.this, "Books (Not Implemented)", Toast.LENGTH_SHORT).show(); // Example toast
                     Toast.makeText(AddAndViewInformation.this, "Home Page", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (item.getItemId() == R.id.nav_profile) {

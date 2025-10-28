@@ -13,6 +13,7 @@ package com.example.cognify;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -65,6 +66,7 @@ public class DefinitionBuilder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        getWindow().setStatusBarColor(Color.BLACK);
         setContentView(R.layout.activity_definition_builder);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -380,17 +382,6 @@ public class DefinitionBuilder extends AppCompatActivity {
             //2.1)
             numLevels++;
             pb.incrementProgressBy(20);
-//            switch (numLevels){
-//                case 1:{
-//                    pb.incrementProgressBy(25);
-//                    break;
-//                }
-//                case 2:{
-//                    pb.incrementProgressBy(50);
-//                    break;
-//                }
-//            }
-//            pb.incrementProgressBy(50);
             //2.2)
             currentTAndD = null;
             definition = null;
