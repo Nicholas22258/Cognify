@@ -68,41 +68,19 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/tvHello"
                 app:layout_constraintTop_toBottomOf="@id/tvHello"/>
-            <!--  Bell Icon  -->
-            <ImageView
-                android:id="@+id/ivBellIcon"
-                android:layout_width="21dp"
-                android:layout_height="28dp"
-                android:layout_marginEnd="20dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_bell"
-                app:layout_constraintBottom_toBottomOf="@id/ivProfilePicture"
-                app:layout_constraintEnd_toStartOf="@id/ivMenuIcon"
-                app:layout_constraintTop_toTopOf="@id/ivProfilePicture"/>
-            <!--  Menu Icon  -->
-            <ImageView
-                android:id="@+id/ivMenuIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_menu"
-                app:layout_constraintBottom_toBottomOf="@id/ivProfilePicture"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/ivProfilePicture"/>
-            <!--  Streak Badge  -->
-            <!--  Day Circles Container  -->
+
+            <!-- Matching Game Streak Badge -->
             <LinearLayout
                 android:id="@+id/llStreakMatchingGame"
                 android:layout_width="90dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/streak_badge_bg"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.08"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/llStreakDefinitionBuilder"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivProfilePicture">
 
@@ -122,18 +100,31 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/matchingGameStreakLabel"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Matching Game"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/llStreakMatchingGame"
+                app:layout_constraintStart_toStartOf="@+id/llStreakMatchingGame"
+                app:layout_constraintTop_toBottomOf="@+id/llStreakMatchingGame" />
+
+            <!-- Definition Builder Streak Badge -->
             <LinearLayout
                 android:id="@+id/llStreakDefinitionBuilder"
                 android:layout_width="90dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/streak_badge_bg"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="25dp"
+                app:layout_constraintEnd_toStartOf="@+id/llStreakCrossword"
+                app:layout_constraintStart_toEndOf="@+id/llStreakMatchingGame"
                 app:layout_constraintTop_toBottomOf="@id/ivProfilePicture">
 
                 <ImageView
@@ -152,18 +143,32 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/definitionBuilderStreakLabel"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Definition Builder"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/llStreakDefinitionBuilder"
+                app:layout_constraintStart_toStartOf="@+id/llStreakDefinitionBuilder"
+                app:layout_constraintTop_toBottomOf="@+id/llStreakDefinitionBuilder" />
+
+            <!-- Crossword Streak Badge -->
             <LinearLayout
                 android:id="@+id/llStreakCrossword"
                 android:layout_width="90dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/streak_badge_bg"
                 android:gravity="center"
                 android:orientation="horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.903"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/llStreakDefinitionBuilder"
                 app:layout_constraintTop_toBottomOf="@id/ivProfilePicture">
 
                 <ImageView
@@ -181,6 +186,19 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/crosswordStreakLabel"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Crossword"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/llStreakCrossword"
+                app:layout_constraintStart_toStartOf="@+id/llStreakCrossword"
+                app:layout_constraintTop_toBottomOf="@+id/llStreakCrossword" />
 
             <LinearLayout
                 android:id="@+id/llDayCircles"
@@ -288,47 +306,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <TextView
-                android:id="@+id/matchingGameStreakLabel"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="Matching Game"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.08"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.312" />
 
-            <TextView
-                android:id="@+id/definitionBuilderStreakLabel"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="Definition Builder"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.312" />
-
-            <TextView
-                android:id="@+id/crosswordStreakLabel"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="Crossword"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.903"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.312" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <!--  ================================================================  -->

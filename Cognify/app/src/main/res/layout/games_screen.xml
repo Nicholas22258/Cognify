@@ -19,18 +19,18 @@
     tools:context=".GamesScreen">
 
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/back_arrow"-->
-<!--        android:layout_width="45sp"-->
-<!--        android:layout_height="45sp"-->
-<!--        android:contentDescription="@string/cancel_button"-->
-<!--        android:background="@drawable/back_arrow"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.125"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.065"/>-->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/back_arrow"-->
+    <!--        android:layout_width="45sp"-->
+    <!--        android:layout_height="45sp"-->
+    <!--        android:contentDescription="@string/cancel_button"-->
+    <!--        android:background="@drawable/back_arrow"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.125"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.065"/>-->
 
     <TextView
         android:id="@+id/headingMain"
@@ -61,44 +61,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.156" />
-
+<!--    android:scaleType="fitCenter"-->
     <ImageButton
         android:id="@+id/matchingGame"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+
         android:contentDescription="@string/matchingGame"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/definitionBuilder"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.303"
+        app:layout_constraintTop_toBottomOf="@id/descriptionMain"
+        app:layout_constraintWidth_percent="0.42"
         app:srcCompat="@drawable/matching_game_pic" />
 
     <ImageButton
         android:id="@+id/definitionBuilder"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+
         android:contentDescription="@string/definitionBuilder"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.883"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.303"
+        app:layout_constraintStart_toEndOf="@+id/matchingGame"
+        app:layout_constraintTop_toTopOf="@id/matchingGame"
+        app:layout_constraintWidth_percent="0.42"
         app:srcCompat="@drawable/definition_builder_pic" />
 
     <ImageButton
         android:id="@+id/crossword"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+
         android:contentDescription="@string/crossword"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.632"
+        app:layout_constraintTop_toBottomOf="@id/matchingGame"
+        app:layout_constraintWidth_percent="0.42"
         app:srcCompat="@drawable/crossword_pic" />
 
     <ProgressBar
