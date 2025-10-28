@@ -119,8 +119,8 @@ public class AddAndViewInformation extends AppCompatActivity {
 
         loadPdfLists();
 
-        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pdfNames);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        spinnerAdapter = new ArrayAdapter<>(this, R.layout.spinner_default_item, pdfNames);
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         listOfPDFs.setAdapter(spinnerAdapter);
 
         listOfPDFs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -176,7 +176,6 @@ public class AddAndViewInformation extends AppCompatActivity {
                 }
             }
         });
-
         getPDFButton.setOnClickListener(v -> openFilePicker());
 
         // Load the last selected PDF if available

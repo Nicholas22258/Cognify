@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -74,6 +75,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
+        //Ensures the application exits, instead going to the previous page
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // When the back button is pressed, finish all activities in the task.
+                // This will exit the application.
+                finishAffinity();
+            }
+        };
+        // Add the callback to the dispatcher
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
         // Login button
         loginButton.setOnClickListener(v -> {
