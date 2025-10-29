@@ -61,6 +61,10 @@ public class PdfLoader {
         } else {
             // No PDF was previously selected
             listener.onPdfLoadFailed("Please select a course to start.");
+
+            Intent intent = new Intent(context, AddAndViewInformation.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
         }
     }
 
@@ -102,3 +106,4 @@ public class PdfLoader {
         }
     }
 }
+
