@@ -158,6 +158,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     } else {
                         // Handle failed login properly
+                        pb.setVisibility(View.GONE);
                         String error = Objects.requireNonNull(task.getException()).getMessage();
                         Toast.makeText(LoginActivity.this, "Login failed: " + error, Toast.LENGTH_SHORT).show();
                     }
@@ -227,3 +228,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 }
+
