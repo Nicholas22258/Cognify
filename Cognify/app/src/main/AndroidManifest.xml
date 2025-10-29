@@ -20,7 +20,6 @@
         <activity
             android:name=".GamesScreen"
             android:exported="false">
-
         </activity>
         <activity
             android:name=".AdminDashboardActivity"
@@ -56,9 +55,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdminLogIn"
-            android:exported="false" />
-        <activity
             android:name=".MatchingGame"
             android:exported="false" />
         <activity
@@ -83,20 +79,8 @@
             android:name=".UserManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
-            android:exported="false"/>
-        <activity
             android:name=".HelpActivity"
             android:exported="false"/>
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
     </application>
-
 
 </manifest>
