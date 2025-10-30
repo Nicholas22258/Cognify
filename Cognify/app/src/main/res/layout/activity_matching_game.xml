@@ -89,23 +89,6 @@
         app:layout_constraintVertical_bias="0.216" />
 
 
-    <!--Feel free to change the colour of the buttons.
-    They backgrounds can be found in the drawable folder - mg_definition_button_format,
-        and mg_term_button_format-->
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/Term2"
-        android:layout_width="165dp"
-        android:layout_height="58dp"
-        android:background="@drawable/mg_term_button_format"
-        android:text="@string/MG_term"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.523" />
 
     <TextView
         android:id="@+id/definitionHeading"
@@ -141,142 +124,150 @@
         android:id="@+id/Def1"
         android:layout_width="165dp"
         android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/mg_definition_button_format"
         android:text="@string/MG_definition"
         android:textColor="@color/white"
         app:autoSizeMaxTextSize="16sp"
         app:autoSizeMinTextSize="10sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintEnd_toStartOf="@+id/Term1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.416" />
+        app:layout_constraintTop_toBottomOf="@id/definitionHeading" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Def2"
         android:layout_width="165dp"
         android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/mg_definition_button_format"
         android:text="@string/MG_definition"
         android:textColor="@color/white"
         app:autoSizeMaxTextSize="16sp"
         app:autoSizeMinTextSize="10sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.523" />
+        app:layout_constraintEnd_toEndOf="@id/Def1"
+        app:layout_constraintStart_toStartOf="@id/Def1"
+        app:layout_constraintTop_toBottomOf="@id/Def1" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Def3"
         android:layout_width="165dp"
         android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/mg_definition_button_format"
         android:text="@string/MG_definition"
         android:textColor="@color/white"
         app:autoSizeMaxTextSize="16sp"
         app:autoSizeMinTextSize="10sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintEnd_toEndOf="@id/Def1"
+        app:layout_constraintStart_toStartOf="@id/Def1"
+        app:layout_constraintTop_toBottomOf="@id/Def2" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Def4"
         android:layout_width="165dp"
         android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/mg_definition_button_format"
         android:text="@string/MG_definition"
         android:textColor="@color/white"
         app:autoSizeMaxTextSize="16sp"
         app:autoSizeMinTextSize="10sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.736" />
+        app:layout_constraintEnd_toEndOf="@id/Def1"
+        app:layout_constraintStart_toStartOf="@id/Def1"
+        app:layout_constraintTop_toBottomOf="@id/Def3"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Def5"
         android:layout_width="165dp"
         android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/mg_definition_button_format"
         android:text="@string/MG_definition"
         android:textColor="@color/white"
         app:autoSizeMaxTextSize="16sp"
         app:autoSizeMinTextSize="10sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintEnd_toEndOf="@id/Def1"
+        app:layout_constraintStart_toStartOf="@id/Def1"
+        app:layout_constraintTop_toBottomOf="@id/Def4"  />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Term1"
         android:layout_width="165dp"
         android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/mg_term_button_format"
         android:text="@string/MG_term"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.416" />
+        app:layout_constraintStart_toEndOf="@+id/Def1"
+        app:layout_constraintTop_toTopOf="@id/Def1"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/Term4"
+        android:id="@+id/Term2"
         android:layout_width="165dp"
         android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/mg_term_button_format"
         android:text="@string/MG_term"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.736" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/Term5"
-        android:layout_width="165dp"
-        android:layout_height="58dp"
-        android:background="@drawable/mg_term_button_format"
-        android:text="@string/MG_term"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintEnd_toEndOf="@id/Term1"
+        app:layout_constraintStart_toStartOf="@id/Term1"
+        app:layout_constraintTop_toTopOf="@id/Def2" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Term3"
         android:layout_width="165dp"
         android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/mg_term_button_format"
         android:text="@string/MG_term"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintEnd_toEndOf="@id/Term1"
+        app:layout_constraintStart_toStartOf="@id/Term1"
+        app:layout_constraintTop_toTopOf="@id/Def3"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/Term4"
+        android:layout_width="165dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/mg_term_button_format"
+        android:text="@string/MG_term"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/Term1"
+        app:layout_constraintStart_toStartOf="@id/Term1"
+        app:layout_constraintTop_toTopOf="@id/Def4"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/Term5"
+        android:layout_width="165dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/mg_term_button_format"
+        android:text="@string/MG_term"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/Term1"
+        app:layout_constraintStart_toStartOf="@id/Term1"
+        app:layout_constraintTop_toTopOf="@id/Def5"  />
 
     <ProgressBar
         android:id="@+id/progressBar"
