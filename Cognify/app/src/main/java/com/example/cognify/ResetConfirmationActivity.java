@@ -52,7 +52,7 @@ public class ResetConfirmationActivity extends AppCompatActivity {
 
         // Handle "Back to Login" button
         loginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(ResetConfirmationActivity.this, GamesScreen.class);
+            Intent intent = new Intent(ResetConfirmationActivity.this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish(); // Close this activity so user can’t go back here
@@ -72,3 +72,4 @@ public class ResetConfirmationActivity extends AppCompatActivity {
         });
     }
 }
+
