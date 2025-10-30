@@ -32,9 +32,13 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.flexbox.FlexboxLayout;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -44,23 +48,27 @@ public class DefinitionBuilder extends AppCompatActivity {
     * FlexboxLayouts will be used to display and hold words that make up the definition
     * Add implementation("com.google.android.flexbox:flexbox:3.0.0") to build.gradle.kts (Module :app)
     * */
-    FlexboxLayout definitionLayout;
-    FlexboxLayout wordChoicesLayout;
-    TextView termView;
-    TextView stopwatchTimer;
+    private FlexboxLayout definitionLayout;
+//    private FlexboxLayout wordChoicesLayout;
+    private TextView termView;
+    private TextView stopwatchTimer;
 
-    Runnable stopWatchRunnable;
-    Handler stopwatchHandler;
+    private Runnable stopWatchRunnable;
+    private Handler stopwatchHandler;
 
-    TermsAndDefinitions currentTAndD;
+    private TermsAndDefinitions currentTAndD;
 
-    String[] definition;
+    private String[] definition;
 
-    String term;
+    private String term;
 
-    int numLevels = 0;
+    private int numLevels = 0;
 
-    ProgressBar pb;
+    private ProgressBar pb;
+
+    private RecyclerView wordChoicesRecyclerView; // Add RecyclerView variable
+    private WordChoicesAdapter wordChoicesAdapter; // Add Adapter variable
+    private List<String> currentWordChoices = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +84,15 @@ public class DefinitionBuilder extends AppCompatActivity {
 
         termView = findViewById(R.id.termToDisplay);
         definitionLayout = findViewById(R.id.wordDropZone);
-        wordChoicesLayout = findViewById(R.id.flexboxLayoutWordChoices);
+//        wordChoicesLayout = findViewById(R.id.flexboxLayoutWordChoices);
         Button btnCheck = findViewById(R.id.checkButton);
         pb = findViewById(R.id.progressBar);
         stopwatchTimer = findViewById(R.id.stopwatchTimer);
+
+//        wordDropZone = findViewById(R.id.wordDropZone);
+        wordChoicesRecyclerView = findViewById(R.id.wordChoicesRecyclerView);
+
+        setupRecyclerView();
 
         stopwatchHandler = new Handler();
         pb.setMax(100);
@@ -137,11 +150,43 @@ public class DefinitionBuilder extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
+    private void setupRecyclerView() {
+        // 1. Create the Layout Manager that mimics FlexboxLayout's behavior
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START); // Align items to the start
+
+        // 2. Set the Layout Manager on the RecyclerView
+        wordChoicesRecyclerView.setLayoutManager(layoutManager);
+
+        // 3. Create and set the Adapter
+        wordChoicesAdapter = new WordChoicesAdapter(this, currentWordChoices, (word, position) -> {
+            // This code runs when a word in the RecyclerView is clicked
+
+            // Remove the word from the choices list
+            currentWordChoices.remove(position);
+            wordChoicesAdapter.notifyItemRemoved(position);
+            wordChoicesAdapter.notifyItemRangeChanged(position, currentWordChoices.size());
+
+            // Add a corresponding TextView to the drop zone
+            addWordToDropZone(word);
+        });
+        wordChoicesRecyclerView.setAdapter(wordChoicesAdapter);
+    }
+
+    // --- NEW METHOD to add a word to the top FlexboxLayout ---
+    private void addWordToDropZone(String word) {
+        TextView wordView = createWordTextView(word);
+        definitionLayout.addView(wordView);
+
+        // Set the listener for the newly added word to move it back
+        wordView.setOnClickListener(v -> moveWordToChoices((TextView) v));
+    }
+
     /*
     * Creates new views to display and hold the individual words
     * When a word is clicked, it is moved to the definition layout
     * */
-    private void setWords(){
+    /*private void setWords(){
         for (String word : definition) {
             TextView wordView = createWordTextView(word);
             wordChoicesLayout.addView(wordView);
@@ -150,7 +195,7 @@ public class DefinitionBuilder extends AppCompatActivity {
                 moveWordToDefinition((TextView) v);
             });
         }
-    }
+    }*/
 
     /*
     * Reusable helper method to create styled TextViews for words
@@ -250,9 +295,9 @@ public class DefinitionBuilder extends AppCompatActivity {
         // 1)
         definitionLayout.removeView(wordView);
         // 2)
-        wordChoicesLayout.addView(wordView);
+        currentWordChoices.add(wordView.getText().toString());
         // 3)
-        wordView.setOnClickListener(v -> moveWordToDefinition((TextView) v));
+        wordChoicesAdapter.notifyItemInserted(currentWordChoices.size() - 1);
     }
 
 
@@ -263,14 +308,14 @@ public class DefinitionBuilder extends AppCompatActivity {
      * 2) Add the word to the definition layout
      * 3) Set the new click listener so it can be moved back to choices
      * */
-    private void moveWordToDefinition(TextView wordView){
+    /*private void moveWordToDefinition(TextView wordView){
         // 1)
         wordChoicesLayout.removeView(wordView);
         // 2)
         definitionLayout.addView(wordView);
         // 3)
         wordView.setOnClickListener(v -> moveWordToChoices((TextView) v));
-    }
+    }*/
 
     /*
     * Retrieves a random term and definition from the TermsAndDefinitions class
@@ -388,7 +433,7 @@ public class DefinitionBuilder extends AppCompatActivity {
             term = "";
             //2.3)
             definitionLayout.removeAllViews();
-            wordChoicesLayout.removeAllViews();
+//            wordChoicesLayout.removeAllViews();
 
             //2.4)
             //2.4.1)
@@ -399,7 +444,10 @@ public class DefinitionBuilder extends AppCompatActivity {
             //2.4.3)
             definition = getDefinition();
             //2.4.4)
-            setWords();
+
+            currentWordChoices.addAll(Arrays.asList(definition));
+            wordChoicesAdapter.notifyDataSetChanged();
+//            setWords();
         }else{//3)
             //3.1)
 //            Toast.makeText(DefinitionBuilder.this, "End of game!", Toast.LENGTH_SHORT).show();
