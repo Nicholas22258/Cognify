@@ -12,4 +12,4 @@ We are trying to provide alternative methods of learning apart from traditional 
 does not keep students attentive and motivated. Whereas gamified learning keeps things interesting for students and motivated them to continue learning 
 instead of eventually losing interest and motivation as most students do after some time.
  
-We have used android studio to create the UI (using xml), java for the functionality and Firebase as our database.
+We have used android studio to create the UI (using xml), java for the functionality and Firestore as our database.
