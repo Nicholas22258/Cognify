@@ -114,25 +114,17 @@
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
 
-    <com.google.android.flexbox.FlexboxLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wordDropZone"
         android:layout_width="0dp"
         android:layout_height="195dp"
-        android:layout_marginEnd="6dp"
         android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
         android:background="@drawable/db_drop_zone_background"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:alignContent="flex_start"
-        app:flexWrap="wrap"
         app:layout_constraintEnd_toEndOf="@+id/termToDisplay"
         app:layout_constraintStart_toStartOf="@+id/termToDisplay"
-        app:layout_constraintTop_toBottomOf="@+id/termToDisplay">
-        <!-- Word TextViews will be added here programmatically -->
-    </com.google.android.flexbox.FlexboxLayout>
+        app:layout_constraintTop_toBottomOf="@+id/termToDisplay" />
 
-
-    <!-- CHANGE: Replaced FlexboxLayout with RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wordChoicesRecyclerView"
         android:layout_width="0dp"
