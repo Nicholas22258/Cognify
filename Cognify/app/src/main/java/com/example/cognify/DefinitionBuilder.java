@@ -48,8 +48,13 @@ public class DefinitionBuilder extends AppCompatActivity {
     * FlexboxLayouts will be used to display and hold words that make up the definition
     * Add implementation("com.google.android.flexbox:flexbox:3.0.0") to build.gradle.kts (Module :app)
     * */
-    private FlexboxLayout definitionLayout;
+//    private FlexboxLayout definitionLayout;
 //    private FlexboxLayout wordChoicesLayout;
+    private RecyclerView definitionLayout;
+    private WordDropZoneAdapter wordDropZoneAdapter;
+    private List<String> droppedWords = new ArrayList<>();
+
+
     private TextView termView;
     private TextView stopwatchTimer;
 
@@ -93,6 +98,7 @@ public class DefinitionBuilder extends AppCompatActivity {
         wordChoicesRecyclerView = findViewById(R.id.wordChoicesRecyclerView);
 
         setupRecyclerView();
+        setupDropZoneRecyclerView();
 
         stopwatchHandler = new Handler();
         pb.setMax(100);
@@ -173,29 +179,37 @@ public class DefinitionBuilder extends AppCompatActivity {
         wordChoicesRecyclerView.setAdapter(wordChoicesAdapter);
     }
 
-    // --- NEW METHOD to add a word to the top FlexboxLayout ---
-    private void addWordToDropZone(String word) {
-        TextView wordView = createWordTextView(word);
-        definitionLayout.addView(wordView);
+    private void setupDropZoneRecyclerView() {
+        // 1. Create the Layout Manager
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START); // Align items to the start
 
-        // Set the listener for the newly added word to move it back
-        wordView.setOnClickListener(v -> moveWordToChoices((TextView) v));
+        // 2. Set the Layout Manager on the RecyclerView
+        definitionLayout.setLayoutManager(layoutManager);
+
+        // 3. Create and set the Adapter
+        wordDropZoneAdapter = new WordDropZoneAdapter(this, droppedWords, (word, position) -> {
+            // This code runs when a word in the drop zone is clicked
+            moveWordToChoices(word, position);
+        });
+        definitionLayout.setAdapter(wordDropZoneAdapter);
     }
 
-    /*
-    * Creates new views to display and hold the individual words
-    * When a word is clicked, it is moved to the definition layout
-    * */
-    /*private void setWords(){
-        for (String word : definition) {
-            TextView wordView = createWordTextView(word);
-            wordChoicesLayout.addView(wordView);
-            wordView.setOnClickListener(v -> {
-                // Set the initial click listener to move the word TO the definition
-                moveWordToDefinition((TextView) v);
-            });
-        }
-    }*/
+    private void addWordToDropZone(String word) {
+        // Add the word to the drop zone's data list
+        droppedWords.add(word);
+        // Notify the adapter that a new item has been inserted at the end
+        wordDropZoneAdapter.notifyItemInserted(droppedWords.size() - 1);
+    }
+
+
+//    private void addWordToDropZone(String word) {
+//        TextView wordView = createWordTextView(word);
+//        definitionLayout.addView(wordView);
+//
+//        // Set the listener for the newly added word to move it back
+//        wordView.setOnClickListener(v -> moveWordToChoices((TextView) v));
+//    }
 
     /*
     * Reusable helper method to create styled TextViews for words
@@ -291,14 +305,27 @@ public class DefinitionBuilder extends AppCompatActivity {
     * 2) Add the word back to the word choices layout
     * 3) Set the click listener so it can be moved back to the definition if clicked again
     * */
-    private void moveWordToChoices(TextView wordView){
-        // 1)
-        definitionLayout.removeView(wordView);
-        // 2)
-        currentWordChoices.add(wordView.getText().toString());
-        // 3)
+//    private void moveWordToChoices(TextView wordView){
+//        // 1)
+//        definitionLayout.removeView(wordView);
+//        // 2)
+//        currentWordChoices.add(wordView.getText().toString());
+//        // 3)
+//        wordChoicesAdapter.notifyItemInserted(currentWordChoices.size() - 1);
+//    }
+
+    private void moveWordToChoices(String word, int position) {
+        // 1) Remove the word from the drop zone list
+        droppedWords.remove(position);
+        wordDropZoneAdapter.notifyItemRemoved(position);
+
+        // 2) Add the word back to the word choices list
+        currentWordChoices.add(word);
+
+        // 3) Notify the choices adapter that a new item has been inserted
         wordChoicesAdapter.notifyItemInserted(currentWordChoices.size() - 1);
     }
+
 
 
     /*
@@ -404,6 +431,18 @@ public class DefinitionBuilder extends AppCompatActivity {
         }
     }
 
+//    private boolean checkAnswer() {
+//        // Join the words from the 'droppedWords' list with spaces
+//        String builtDefinition = String.join(" ", droppedWords);
+//
+//        // The original correct definition from your currentTAndD object
+//        String correctDefinition = currentTAndD.getDefinition();
+//
+//        // Compare the user's arrangement with the correct one
+//        return builtDefinition.equals(correctDefinition);
+//    }
+
+
     /*
     * Creates a new level
     *
@@ -426,7 +465,7 @@ public class DefinitionBuilder extends AppCompatActivity {
             //2)
             //2.1)
             numLevels++;
-            pb.incrementProgressBy(20);
+            pb.incrementProgressBy(15);
             //2.2)
             currentTAndD = null;
             definition = null;
@@ -444,6 +483,9 @@ public class DefinitionBuilder extends AppCompatActivity {
             //2.4.3)
             definition = getDefinition();
             //2.4.4)
+
+            droppedWords.clear();
+            wordDropZoneAdapter.notifyDataSetChanged();
 
             currentWordChoices.addAll(Arrays.asList(definition));
             wordChoicesAdapter.notifyDataSetChanged();
@@ -515,19 +557,6 @@ public class DefinitionBuilder extends AppCompatActivity {
 //        Intent intent = new Intent(DefinitionBuilder.this, PostGameScreen.class);
 //        startActivity(intent);
 //    }
-
-    public void onBackPressedDispatcher() {
-        // Prevent going back during the game
-        new AlertDialog.Builder(this)
-                .setTitle("Exit Game")
-                .setMessage("Are you sure you want to exit? Your progress will be lost.")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    stopStopwatch();
-                    super.onBackPressed();
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }
 
 
     @Override
