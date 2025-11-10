@@ -202,44 +202,72 @@
 
             <LinearLayout
                 android:id="@+id/llDayCircles"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
                 android:orientation="horizontal"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/definitionBuilderStreakLabel">
                 <TextView
                     style="@style/DayCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
                     android:text="M"/>
-                <!--  I recommend using a style for repeated views like this  -->
+
                 <TextView
                     style="@style/DayCircle"
-                    android:layout_marginStart="10dp"
-                    android:text="T"/>
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="Tu"/>
+
                 <TextView
                     style="@style/DayCircle"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
                     android:text="W"/>
+
                 <TextView
                     style="@style/DayCircle"
-                    android:layout_marginStart="10dp"
-                    android:text="T"/>
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="Th"/>
+
                 <TextView
                     style="@style/DayCircle"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
                     android:text="F"/>
+
                 <TextView
                     style="@style/DayCircle"
-                    android:layout_marginStart="10dp"
-                    android:text="S"/>
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="Sa"/>
+
                 <TextView
                     style="@style/DayCircle"
-                    android:layout_marginStart="10dp"
-                    android:text="S"/>
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="Su"/>
             </LinearLayout>
             <!--  Games Title  -->
             <TextView
@@ -309,9 +337,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-    <!--  ================================================================  -->
-    <!--   THIS IS THE NEWLY ADDED BOTTOM NAVIGATION BAR                    -->
-    <!--  ================================================================  -->
+
     <!--  In activity_home_page.xml  -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -329,5 +355,5 @@
         app:itemBackground="@drawable/nav_active_indicator"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_menu" />
-<!--    app:itemIconTint="@null"-->
+    <!--    app:itemIconTint="@null"-->
 </androidx.constraintlayout.widget.ConstraintLayout>
