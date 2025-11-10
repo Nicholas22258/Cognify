@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +43,8 @@ public class HomePage extends AppCompatActivity {
     private TextView tvStreakCountCR;
     // Add more if needed, e.g., for day circles or titles
 
-    private LinearLayout llMatchingGame,llDayCircles;
+    private LinearLayout llDayCircles;
+    private LinearLayout llMatchingGame;
 
     private LinearLayout llDefinitionBuilder;
 
@@ -82,7 +84,6 @@ public class HomePage extends AppCompatActivity {
         setOnClickListeners();
         highlightStreak();
 
-
         // Set up Bottom Navigation View
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
@@ -96,7 +97,6 @@ public class HomePage extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_books) {
                     // Navigate to Books Activity
                     startActivity(new Intent(HomePage.this, AddAndViewInformation.class));
-//                    Toast.makeText(HomePage.this, "Books (Not Implemented)", Toast.LENGTH_SHORT).show(); // Example toast
                     return true;
                 } else if (item.getItemId() == R.id.nav_profile) {
                     // Navigate to Profile Activity
@@ -124,13 +124,6 @@ public class HomePage extends AppCompatActivity {
         llMatchingGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle Matching Game click (e.g., start the game)
-//                Toast.makeText(HomePage.this, "Starting Matching Game", Toast.LENGTH_SHORT).show();
-//                 GamesScreen gs = new GamesScreen();
-//                 gs.loadLastSelectedPdf();
-//                 Intent intent = new Intent(HomePage.this, MatchingGame.class);
-//                 startActivity(intent);
-
                 pdfLoader.loadLastSelectedPdf(HomePage.this, new PdfLoader.PdfLoaderListener() {
                     @Override
                     public void onPdfLoaded(String courseName, int termCount) {
@@ -149,13 +142,6 @@ public class HomePage extends AppCompatActivity {
         llDefinitionBuilder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle Definition Builder click
-//                Toast.makeText(HomePage.this, "Starting Definition Builder", Toast.LENGTH_SHORT).show();
-//                GamesScreen gs = new GamesScreen();
-//                gs.loadLastSelectedPdf();
-//                 Intent intent = new Intent(HomePage.this, DefinitionBuilder.class);
-//                 startActivity(intent);
-
                 pdfLoader.loadLastSelectedPdf(HomePage.this, new PdfLoader.PdfLoaderListener() {
                     @Override
                     public void onPdfLoaded(String courseName, int termCount) {
@@ -174,13 +160,6 @@ public class HomePage extends AppCompatActivity {
         llCrossword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle Word Master click
-//                Toast.makeText(HomePage.this, "Starting Word Master", Toast.LENGTH_SHORT).show();
-//                GamesScreen gs = new GamesScreen();
-//                gs.loadLastSelectedPdf(this);
-//                 Intent intent = new Intent(HomePage.this, Crossword.class);
-//                 startActivity(intent);
-
                 pdfLoader.loadLastSelectedPdf(HomePage.this, new PdfLoader.PdfLoaderListener() {
                     @Override
                     public void onPdfLoaded(String courseName, int termCount) {
@@ -294,22 +273,25 @@ public class HomePage extends AppCompatActivity {
 
         int todayIndex = mapDayOfWeekToIndex(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
         for (int i = 0; i < llDayCircles.getChildCount(); i++) {
-            TextView day = (TextView) llDayCircles.getChildAt(i);
-            GradientDrawable circle = new GradientDrawable();
-            circle.setShape(GradientDrawable.OVAL);
+            if (llDayCircles.getChildAt(i) instanceof TextView){
+                TextView day = (TextView) llDayCircles.getChildAt(i);
+                GradientDrawable circle = new GradientDrawable();
+                circle.setShape(GradientDrawable.OVAL);
 
-            if (i < todayIndex) {
-                circle.setColor(Color.LTGRAY);
-                day.setTextColor(Color.BLACK);
-            } else if (i == todayIndex) {
-                circle.setColor(Color.parseColor("#FF9800"));
-                day.setTextColor(Color.WHITE);
-            } else {
-                circle.setColor(Color.parseColor("#DDDDDD"));
-                day.setTextColor(Color.BLACK);
+                if (i < todayIndex) {
+                    circle.setColor(Color.LTGRAY);
+                    day.setTextColor(Color.BLACK);
+                } else if (i == todayIndex) {
+                    circle.setColor(Color.parseColor("#FF9800"));
+                    day.setTextColor(Color.WHITE);
+                } else {
+                    circle.setColor(Color.parseColor("#DDDDDD"));
+                    day.setTextColor(Color.BLACK);
+                }
+                circle.setStroke(3, Color.BLACK);
+                day.setBackground(circle);
             }
-            circle.setStroke(3, Color.BLACK);
-            day.setBackground(circle);
+
         }
     }
 
@@ -331,6 +313,5 @@ public class HomePage extends AppCompatActivity {
         getUserDetails();
         updateUiWithLocalData();
         highlightStreak();
-
     }
 }
