@@ -8,4 +8,6 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:singleLine="true"
+    android:textAlignment="center"
+    android:background="@drawable/pdf_drop_down_item_background"
     android:textColor="@android:color/black" />
