@@ -12,11 +12,6 @@
             android:title="User Management" />
 
         <item
-            android:id="@+id/nav_content"
-            android:icon="@drawable/ic_materials"
-            android:title="Content Management" />
-
-        <item
             android:id="@+id/nav_analytics"
             android:icon="@drawable/ic_analytics"
             android:title="Game Analytics" />
