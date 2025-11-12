@@ -12,7 +12,6 @@ package com.example.cognify;
  * */
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -50,7 +49,7 @@ public class AdminDashboardActivity extends AppCompatActivity
 
     private TextView welcomeText, dateText;
     private TextView totalUsersCount, activeUsersCount, totalMaterialsCount, totalGameSessionsCount;
-    private MaterialCardView userManagementCard, contentManagementCard, gameAnalyticsCard, reportsCard;
+    private MaterialCardView userManagementCard, /*contentManagementCard,*/ gameAnalyticsCard, reportsCard;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -59,7 +58,6 @@ public class AdminDashboardActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_dash);
-        getWindow().setStatusBarColor(Color.BLACK);
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
@@ -98,7 +96,7 @@ public class AdminDashboardActivity extends AppCompatActivity
         totalGameSessionsCount = findViewById(R.id.totalGameSessionsCount);
 
         userManagementCard = findViewById(R.id.userManagementCard);
-        contentManagementCard = findViewById(R.id.contentManagementCard);
+//        contentManagementCard = findViewById(R.id.contentManagementCard);
         gameAnalyticsCard = findViewById(R.id.gameAnalyticsCard);
         reportsCard = findViewById(R.id.reportsCard);
     }
@@ -198,7 +196,7 @@ public class AdminDashboardActivity extends AppCompatActivity
     }
 
     private void loadTotalMaterials() {
-        db.collection("studyMaterials")
+        db.collection("study_materials")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -214,7 +212,7 @@ public class AdminDashboardActivity extends AppCompatActivity
     }
 
     private void loadTotalGameSessions() {
-        db.collection("gameSessions")
+        db.collection("gamification")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -233,30 +231,23 @@ public class AdminDashboardActivity extends AppCompatActivity
         userManagementCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Create UserManagementActivity
-                Toast.makeText(AdminDashboardActivity.this,
-                        "User Management - Coming Soon", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(AdminDashboardActivity.this, UserManagementActivity.class));
             }
         });
 
-        contentManagementCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Create ContentManagementActivity
-                Toast.makeText(AdminDashboardActivity.this,
-                        "Content Management - Coming Soon", Toast.LENGTH_SHORT).show();
-                 startActivity(new Intent(AdminDashboardActivity.this, ContentManagementActivity.class));
-            }
-        });
+//        contentManagementCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                startActivity(new Intent(AdminDashboardActivity.this, ContentManagementActivity.class));
+//            }
+//        });
 
         gameAnalyticsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Create GameAnalyticsActivity
-                Toast.makeText(AdminDashboardActivity.this,
-                        "Game Analytics - Coming Soon", Toast.LENGTH_SHORT).show();
-                // startActivity(new Intent(AdminDashboardActivity.this, GameAnalyticsActivity.class));
+
+                startActivity(new Intent(AdminDashboardActivity.this, GameAnalyticsActivity.class));
             }
         });
 
@@ -276,20 +267,16 @@ public class AdminDashboardActivity extends AppCompatActivity
             // Already on dashboard
             Toast.makeText(this, "Dashboard", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_users) {
-            Toast.makeText(this, "User Management - Coming Soon", Toast.LENGTH_SHORT).show();
+
             startActivity(new Intent(this, UserManagementActivity.class));
-        } else if (id == R.id.nav_content) {
-            Toast.makeText(this, "Content Management - Coming Soon", Toast.LENGTH_SHORT).show();
-            // startActivity(new Intent(this, ContentManagementActivity.class));
-        } else if (id == R.id.nav_analytics) {
-            Toast.makeText(this, "Game Analytics - Coming Soon", Toast.LENGTH_SHORT).show();
-            // startActivity(new Intent(this, GameAnalyticsActivity.class));
+        } /*else if (id == R.id.nav_content) {
+            startActivity(new Intent(this, ContentManagementActivity.class));
+        } */else if (id == R.id.nav_analytics) {
+            startActivity(new Intent(this, GameAnalyticsActivity.class));
         } else if (id == R.id.nav_reports) {
-//            Toast.makeText(this, "Reports - Coming Soon", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, ReportsActivity.class));
         } else if (id == R.id.nav_settings) {
-            Toast.makeText(this, "Settings - Coming Soon", Toast.LENGTH_SHORT).show();
-            // startActivity(new Intent(this, SettingsActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.nav_logout) {
             showLogoutDialog();
         }

@@ -29,8 +29,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         void onViewDetails(User user);
         void onSuspendUser(User user);
         void onActivateUser(User user);
-        void onMakeAdmin(User user); // New callback
+        void onToggleAdmin(User user);
     }
+
 
     // Constructor
     public UserAdapter(Context context, List<User> userList, OnUserActionListener listener) {
@@ -71,9 +72,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         if (user.isAdmin()) {
             holder.statusBadge.setText("Admin");
             holder.statusBadge.setBackgroundResource(R.drawable.badge_admin);
-            holder.suspendButton.setVisibility(View.GONE);
-            holder.makeAdminButton.setVisibility(View.GONE); // Hide Make Admin for admins
-        } else if (user.isActive()) {
+            holder.makeAdminButton.setText("Remove Admin");
+        } else {
+            holder.statusBadge.setText(user.isActive() ? "Active" : "Inactive");
+            holder.statusBadge.setBackgroundResource(user.isActive() ? R.drawable.badge_active : R.drawable.badges_suspended);
+            holder.makeAdminButton.setText("Make Admin");
+        }
+
+      // Make Admin / Remove Admin button
+        holder.makeAdminButton.setVisibility(View.VISIBLE);
+        holder.makeAdminButton.setOnClickListener(v -> {
+            if (listener != null) listener.onToggleAdmin(user);
+        });
+
+        if (user.isActive()) {
             holder.statusBadge.setText("Active");
             holder.statusBadge.setBackgroundResource(R.drawable.badge_active);
             holder.suspendButton.setText("Suspend");
@@ -103,15 +115,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             }
         });
 
-        holder.makeAdminButton.setOnClickListener(v -> {
-            if (listener != null) listener.onMakeAdmin(user);
-        });
-
         // Card click listener for viewing details
         holder.userCard.setOnClickListener(v -> {
             if (listener != null) listener.onViewDetails(user);
         });
     }
+
 
     @Override
     public int getItemCount() {

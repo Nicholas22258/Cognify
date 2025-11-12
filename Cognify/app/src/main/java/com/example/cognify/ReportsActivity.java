@@ -1,6 +1,5 @@
 package com.example.cognify;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,7 +39,6 @@ public class ReportsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_reports);
-        getWindow().setStatusBarColor(Color.BLACK);
 
         // Initialize views
         rvReports = findViewById(R.id.rvReports);

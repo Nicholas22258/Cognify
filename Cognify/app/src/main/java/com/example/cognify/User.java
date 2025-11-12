@@ -2,6 +2,7 @@ package com.example.cognify;
 
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.PropertyName;
 import java.util.Date;
 
 public class User {
@@ -70,21 +71,28 @@ public class User {
         this.joinDate = joinDate;
     }
 
+    @PropertyName("isActive")
     public void setActive(boolean active) {
         isActive = active;
     }
 
+    @PropertyName("isAdmin")
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
 
+
+    @PropertyName("isActive")
     public boolean isActive() {
         return isActive;
     }
 
+    @PropertyName("isAdmin")
     public boolean isAdmin() {
         return isAdmin;
     }
+
+
     public int getTotalMaterialsUploaded() {
         return totalMaterialsUploaded;
     }

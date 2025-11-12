@@ -1,6 +1,6 @@
 package com.example.cognify;
 
-import android.graphics.Color;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,7 +55,6 @@ public class UserManagementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_management);
-        getWindow().setStatusBarColor(Color.BLACK);
 
         // Initialize Firebase
         db = FirebaseFirestore.getInstance();
@@ -118,28 +117,35 @@ public class UserManagementActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onMakeAdmin(User user) {
+            public void onToggleAdmin(User user) {
+                boolean newAdminStatus = !user.isAdmin(); // Toggle current admin status
+                String action = newAdminStatus ? "make" : "remove";
+
                 new AlertDialog.Builder(UserManagementActivity.this)
-                        .setTitle("Make Admin")
-                        .setMessage("Are you sure you want to make " + user.getUsername() + " an admin?")
+                        .setTitle(action.substring(0,1).toUpperCase() + action.substring(1) + " Admin")
+                        .setMessage("Are you sure you want to " + action + " admin for " + user.getUsername() + "?")
                         .setPositiveButton("Yes", (dialog, which) -> {
                             db.collection("users").document(user.getUserId())
-                                    .update("isAdmin", true)
+                                    .update("isAdmin", newAdminStatus)
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(UserManagementActivity.this,
-                                                user.getUsername() + " is now an admin!",
+                                                user.getUsername() + (newAdminStatus ? " is now an admin" : " is no longer an admin"),
                                                 Toast.LENGTH_SHORT).show();
-                                        loadUsers(); // Refresh the list after updating Firestore
+
+                                        // Update the user locally and refresh adapter
+                                        user.setAdmin(newAdminStatus);
+                                        userAdapter.notifyDataSetChanged();
                                     })
                                     .addOnFailureListener(e -> {
                                         Toast.makeText(UserManagementActivity.this,
-                                                "Failed to update user: " + e.getMessage(),
+                                                "Failed to update admin status: " + e.getMessage(),
                                                 Toast.LENGTH_SHORT).show();
                                     });
                         })
                         .setNegativeButton("Cancel", null)
                         .show();
             }
+
         });
 
         usersRecyclerView.setAdapter(userAdapter);
@@ -195,29 +201,12 @@ public class UserManagementActivity extends AppCompatActivity {
                 .orderBy("joinDate", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    userList.clear();
+                    userList.clear(); // Clear existing data
 
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        // ADD THIS - Log raw Firestore data BEFORE converting to User object
-                        if (document.getId().equals("gamifying52@gmail.com") ||
-                                document.getString("email").equals("gamifying52@gmail.com")) {
-                            android.util.Log.d("UserManagement", "=== RAW FIRESTORE DATA for gamifying52 ===");
-                            android.util.Log.d("UserManagement", "Document ID: " + document.getId());
-                            android.util.Log.d("UserManagement", "All data: " + document.getData());
-                            android.util.Log.d("UserManagement", "isAdmin field: " + document.get("isAdmin"));
-                            android.util.Log.d("UserManagement", "isActive field: " + document.get("isActive"));
-                        }
 
                         User user = document.toObject(User.class);
                         user.setUserId(document.getId());
-
-                        // Log after conversion
-                        if (user.getEmail() != null && user.getEmail().equals("gamifying52@gmail.com")) {
-                            android.util.Log.d("UserManagement", "=== AFTER CONVERSION ===");
-                            android.util.Log.d("UserManagement", "user.isAdmin(): " + user.isAdmin());
-                            android.util.Log.d("UserManagement", "user.isActive(): " + user.isActive());
-                        }
-
                         userList.add(user);
                     }
 
@@ -235,10 +224,6 @@ public class UserManagementActivity extends AppCompatActivity {
 
     private void filterUsers() {
         filteredUserList.clear();
-
-        // ADD THIS LOG
-        android.util.Log.d("UserManagement", "=== Filtering with: " + currentFilter + " ===");
-
         for (User user : userList) {
             boolean matchesFilter = false;
             boolean matchesSearch = false;
@@ -257,8 +242,6 @@ public class UserManagementActivity extends AppCompatActivity {
                 case "admins":
                     matchesFilter = user.isAdmin();
 
-                    android.util.Log.d("UserManagement", "User: " + user.getUsername() +
-                            ", isAdmin: " + user.isAdmin() + ", matches: " + matchesFilter);
                     break;
             }
 
@@ -276,10 +259,6 @@ public class UserManagementActivity extends AppCompatActivity {
             }
         }
 
-        // ADD THIS LOG
-        android.util.Log.d("UserManagement", "Total users in list: " + userList.size());
-        android.util.Log.d("UserManagement", "Filtered users: " + filteredUserList.size());
-
         userAdapter.updateList(filteredUserList);
         updateUserCount();
 
@@ -291,6 +270,7 @@ public class UserManagementActivity extends AppCompatActivity {
             usersRecyclerView.setVisibility(View.VISIBLE);
         }
     }
+    @SuppressLint("SetTextI18n")
     private void updateUserCount() {
         userCountText.setText("Total: " + filteredUserList.size() + " users");
     }
@@ -356,26 +336,51 @@ public class UserManagementActivity extends AppCompatActivity {
     }
 
     private void exportUsers() {
-        // Simple export to show data
-        StringBuilder csv = new StringBuilder();
-        csv.append("Username,Email,Status,Admin,Materials,Games,Points\n");
+        android.graphics.pdf.PdfDocument pdfDocument = new android.graphics.pdf.PdfDocument();
+        android.graphics.Paint paint = new android.graphics.Paint();
 
+        // Create a page
+        android.graphics.pdf.PdfDocument.PageInfo pageInfo = new android.graphics.pdf.PdfDocument.PageInfo.Builder(595, 842, 1).create();
+        android.graphics.pdf.PdfDocument.Page page = pdfDocument.startPage(pageInfo);
+
+        int x = 10, y = 25; // starting coordinates
+        paint.setTextSize(12);
+
+        // Header
+        page.getCanvas().drawText("Username, Email, Status, Admin, Materials, Games, Points", x, y, paint);
+        y += 20;
+
+        // Add user data
         for (User user : filteredUserList) {
-            csv.append(user.getUsername()).append(",");
-            csv.append(user.getEmail()).append(",");
-            csv.append(user.isActive() ? "Active" : "Suspended").append(",");
-            csv.append(user.isAdmin() ? "Yes" : "No").append(",");
-            csv.append(user.getTotalMaterialsUploaded()).append(",");
-            csv.append(user.getTotalGamesPlayed()).append(",");
-            csv.append(user.getTotalPoints()).append("\n");
+            String line = user.getUsername() + ", " +
+                    user.getEmail() + ", " +
+                    (user.isActive() ? "Active" : "Suspended") + ", " +
+                    (user.isAdmin() ? "Yes" : "No") + ", " +
+                    user.getTotalMaterialsUploaded() + ", " +
+                    user.getTotalGamesPlayed() + ", " +
+                    user.getTotalPoints();
+            page.getCanvas().drawText(line, x, y, paint);
+            y += 20;
         }
 
-        Toast.makeText(this, "Exported " + filteredUserList.size() + " users\nCSV data ready",
-                Toast.LENGTH_LONG).show();
+        pdfDocument.finishPage(page);
 
-        // TODO: Save CSV to file or share
-        // For now, just showing toast message
+        try {
+            java.io.File downloadsFolder = android.os.Environment.getExternalStoragePublicDirectory(
+                    android.os.Environment.DIRECTORY_DOWNLOADS);
+            java.io.File file = new java.io.File(downloadsFolder, "users_export.pdf");
+            pdfDocument.writeTo(new java.io.FileOutputStream(file));
+
+            Toast.makeText(this, "PDF exported to Downloads: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to export PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        pdfDocument.close();
     }
+
+
 
     private void showLoading(boolean show) {
         if (show) {
@@ -399,7 +404,7 @@ public class UserManagementActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Refresh data when returning to this screen
+
         loadUsers();
     }
 }
