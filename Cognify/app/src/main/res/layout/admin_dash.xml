@@ -1,20 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
     tools:openDrawer="start">
-
-    <!-- MAIN CONTENT -->
+    <!--  MAIN CONTENT  -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <!-- Toolbar -->
+        <!--  Toolbar  -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -22,37 +19,32 @@
             android:background="@android:color/black"
             android:title="Admin Dashboard"
             android:titleTextColor="#F49E20"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-        <!-- Scrollable Dashboard Content -->
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        <!--  Scrollable Dashboard Content  -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
             android:overScrollMode="always">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="#F5F5F5"
                 android:padding="16dp">
-
-                <!-- Welcome Card -->
+                <!--  Welcome Card  -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F49E20"
                         android:orientation="vertical"
                         android:padding="20dp">
-
                         <TextView
                             android:id="@+id/welcomeText"
                             android:layout_width="wrap_content"
@@ -61,8 +53,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/white"
                             android:textSize="22sp"
-                            android:textStyle="bold" />
-
+                            android:textStyle="bold"/>
                         <TextView
                             android:id="@+id/dateText"
                             android:layout_width="wrap_content"
@@ -70,11 +61,10 @@
                             android:layout_marginTop="4dp"
                             android:text="Today"
                             android:textColor="@android:color/black"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <!-- Overview Section -->
+                <!--  Overview Section  -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,9 +72,8 @@
                     android:text="Overview"
                     android:textColor="#333333"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <!-- Statistics Cards Grid -->
+                    android:textStyle="bold"/>
+                <!--  Statistics Cards Grid  -->
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,8 +81,7 @@
                     android:alignmentMode="alignMargins"
                     android:columnCount="2"
                     android:rowCount="2">
-
-                    <!-- Total Users -->
+                    <!--  Total Users  -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/totalUsersCard"
                         android:layout_width="0dp"
@@ -104,7 +92,6 @@
                         android:layout_margin="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="3dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -112,12 +99,10 @@
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
-
                             <ImageView
                                 android:layout_width="50dp"
                                 android:layout_height="45dp"
-                                android:src="@drawable/ic_users" />
-
+                                android:src="@drawable/ic_users"/>
                             <TextView
                                 android:id="@+id/totalUsersCount"
                                 android:layout_width="wrap_content"
@@ -126,18 +111,16 @@
                                 android:text="0"
                                 android:textColor="@android:color/white"
                                 android:textSize="28sp"
-                                android:textStyle="bold" />
-
+                                android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Total Users"
                                 android:textColor="#F49E20"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Active Users -->
+                    <!--  Active Users  -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/activeUsersCard"
                         android:layout_width="0dp"
@@ -148,7 +131,6 @@
                         android:layout_margin="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="3dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -156,12 +138,10 @@
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                app:tint="#2196F3" />
-
+                                app:tint="#2196F3"/>
                             <TextView
                                 android:id="@+id/activeUsersCount"
                                 android:layout_width="wrap_content"
@@ -170,18 +150,16 @@
                                 android:text="0"
                                 android:textColor="@android:color/white"
                                 android:textSize="28sp"
-                                android:textStyle="bold" />
-
+                                android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Active Today"
                                 android:textColor="#F49E20"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Total Materials -->
+                    <!--  Total Materials  -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/totalMaterialsCard"
                         android:layout_width="0dp"
@@ -192,7 +170,6 @@
                         android:layout_margin="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="3dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -200,13 +177,11 @@
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:src="@drawable/ic_materials"
-                                app:tint="#FF9800" />
-
+                                app:tint="#FF9800"/>
                             <TextView
                                 android:id="@+id/totalMaterialsCount"
                                 android:layout_width="wrap_content"
@@ -215,18 +190,16 @@
                                 android:text="0"
                                 android:textColor="@android:color/white"
                                 android:textSize="28sp"
-                                android:textStyle="bold" />
-
+                                android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Study Materials"
                                 android:textColor="#F49E20"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Game Sessions -->
+                    <!--  Game Sessions  -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/totalGameSessionsCard"
                         android:layout_width="0dp"
@@ -237,7 +210,6 @@
                         android:layout_margin="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="3dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -245,13 +217,11 @@
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:src="@drawable/ic_games"
-                                app:tint="@color/white" />
-
+                                app:tint="@color/white"/>
                             <TextView
                                 android:id="@+id/totalGameSessionsCount"
                                 android:layout_width="wrap_content"
@@ -260,19 +230,17 @@
                                 android:text="0"
                                 android:textColor="@android:color/white"
                                 android:textSize="28sp"
-                                android:textStyle="bold" />
-
+                                android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Game Sessions"
                                 android:textColor="#F49E20"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </GridLayout>
-
-                <!-- Quick Actions Section -->
+                <!--  Quick Actions Section  -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -281,9 +249,8 @@
                     android:text="Quick Actions"
                     android:textColor="#333333"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <!-- User Management -->
+                    android:textStyle="bold"/>
+                <!--  User Management  -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/userManagementCard"
                     android:layout_width="match_parent"
@@ -292,34 +259,29 @@
                     app:cardCornerRadius="8dp"
                     app:cardElevation="2dp"
                     android:backgroundTint="#F49E20">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="16dp">
-
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@drawable/ic_users" />
-
+                            android:src="@drawable/ic_users"/>
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="User Management"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
-
+                                android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -327,125 +289,15 @@
                                 android:text="View and manage users"
                                 android:textColor="@android:color/white"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"/>
                         </LinearLayout>
-
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_arrow_right" />
+                            android:src="@drawable/ic_arrow_right"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <!-- Content Management -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/contentManagementCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="2dp"
-                    android:backgroundTint="@color/black">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/ic_materials"
-                            app:tint="#FF9800" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Content Management"
-                                android:textColor="#F49E20"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Manage study materials"
-                                android:textColor="@android:color/white"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_arrow_right"
-                            app:tint="@color/white" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Game Analytics -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/gameAnalyticsCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="2dp"
-                    android:backgroundTint="#F49E20">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/ic_analytics" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Game Analytics"
-                                android:textColor="#333333"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="View game performance"
-                                android:textStyle="bold"
-                                android:textColor="@android:color/white" />
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_arrow_right" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Reports -->
+                <!--  Reports  -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/reportsCard"
                     android:layout_width="match_parent"
@@ -454,62 +306,100 @@
                     app:cardCornerRadius="8dp"
                     app:cardElevation="2dp"
                     android:backgroundTint="@color/black">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="16dp">
-
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_reports"
-                            app:tint="#01AEF2" />
-
+                            app:tint="#01AEF2"/>
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Reports"
                                 android:textColor="#F49E20"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
-
+                                android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:text="Generate and export reports"
                                 android:textColor="@android:color/white"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"/>
                         </LinearLayout>
-
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_arrow_right"
-                            app:tint="@android:color/white" />
+                            app:tint="@android:color/white"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!--  Game Analytics  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/gameAnalyticsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp"
+                    android:backgroundTint="#F49E20">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_analytics"/>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Game Analytics"
+                                android:textColor="#333333"
+                                android:textSize="16sp"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="View game performance"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/white"/>
+                        </LinearLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_right"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
-    <!-- Navigation Drawer -->
+    <!--  Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
-
+        app:menu="@menu/drawer_menu"/>
 </androidx.drawerlayout.widget.DrawerLayout>
