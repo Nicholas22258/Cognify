@@ -12,6 +12,7 @@ package com.example.cognify;
  * */
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -45,6 +46,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         ImageView backButton = findViewById(R.id.iv_back);
         backButton.setOnClickListener(new View.OnClickListener() {

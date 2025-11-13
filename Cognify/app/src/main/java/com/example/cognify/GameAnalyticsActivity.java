@@ -1,5 +1,6 @@
 package com.example.cognify;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.RadioButton;
@@ -33,6 +34,7 @@ public class GameAnalyticsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_analytics);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         db = FirebaseFirestore.getInstance();
 

@@ -1,6 +1,7 @@
 package com.example.cognify;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,6 +56,7 @@ public class UserManagementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_management);
+        getWindow().setStatusBarColor(Color.BLACK);
 
         // Initialize Firebase
         db = FirebaseFirestore.getInstance();
