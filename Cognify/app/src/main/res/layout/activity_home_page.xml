@@ -11,14 +11,20 @@
 - Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
 -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    android:id="@+id/main"
-    tools:context=".HomePage">
+    android:fitsSystemWindows="true"
+    tools:context=".HomePage"
+    tools:openDrawer="start">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,8 +38,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="24dp">
+
             <!--  Added paddingBottom so content doesn't hide behind nav bar when scrolled  -->
             <!--  Profile Picture  -->
+            <ImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/llDayCircles"
+                app:layout_constraintHorizontal_bias="0.956"
+                app:layout_constraintStart_toEndOf="@+id/llStreakCrossword"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.125"
+                app:tint="@android:color/white" />
+
             <ImageView
                 android:id="@+id/ivProfilePicture"
                 android:layout_width="50dp"
@@ -357,3 +378,13 @@
         app:menu="@menu/bottom_nav_menu" />
     <!--    app:itemIconTint="@null"-->
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/main_header"
+        app:menu="@menu/main_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
