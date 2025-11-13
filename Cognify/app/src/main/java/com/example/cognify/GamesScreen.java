@@ -29,11 +29,14 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
@@ -50,6 +53,10 @@ public class GamesScreen extends AppCompatActivity {
     private ProgressBar loadingProgressBar;
     private boolean dataLoaded = true;
 
+    private DrawerLayout drawerLayout;
+    private ImageView ivMenu;
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,18 +64,45 @@ public class GamesScreen extends AppCompatActivity {
 //        EdgeToEdge.enable(this);
         setContentView(R.layout.games_screen);
         getWindow().setStatusBarColor(Color.BLACK);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
         pdfLoader = new PdfLoader();
 
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ivMenu = findViewById(R.id.ivMenu);
+        navigationView = findViewById(R.id.navigationView);
+
         goToMatchingGame = findViewById(R.id.matchingGame);
         goToDefinitionBuilder = findViewById(R.id.definitionBuilder);
         goToCrossword = findViewById(R.id.crossword);
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
+
+        ivMenu.setOnClickListener(v ->{
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int itemID = item.getItemId();
+
+            if (itemID == R.id.homepage){
+                startActivity(new Intent(GamesScreen.this, HomePage.class));
+            }else if (itemID == R.id.information){
+                startActivity(new Intent(GamesScreen.this, AddAndViewInformation.class));
+            }else if (itemID == R.id.profile){
+                startActivity(new Intent(GamesScreen.this, ProfileActivity.class));
+            }else if (itemID == R.id.games){
+                Toast.makeText(GamesScreen.this, "Games Page", Toast.LENGTH_SHORT).show();
+            }else if (itemID == R.id.feedback){
+                startActivity(new Intent(GamesScreen.this, HelpActivity.class));
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
 
         disableGameButtons();
         if (loadingProgressBar != null) {
@@ -185,65 +219,6 @@ public class GamesScreen extends AppCompatActivity {
             }
         });
     }
-
-//    public void loadLastSelectedPdf() {
-//        SharedPreferences settings = getSharedPreferences(AddAndViewInformation.PREFS_NAME, 0);
-//        String uriString = settings.getString(AddAndViewInformation.PREF_LAST_SELECTED_URI, null);
-//        String courseName = settings.getString(AddAndViewInformation.PREF_LAST_SELECTED_NAME, null);
-//
-//        if (uriString != null && courseName != null) {
-//            Uri uri = Uri.parse(uriString);
-//
-//            // Show loading indicator
-//            if (loadingProgressBar != null) {
-//                loadingProgressBar.setVisibility(View.VISIBLE);
-//            }
-//
-//            // Load PDF data in background
-//            new Thread(() -> {
-//                try {
-//                    String textFromPDF = readPdfFromUri(uri);
-//                    loadToTsAndDsList(textFromPDF);
-//
-//                    // Update UI on main thread
-//                    runOnUiThread(() -> {
-//                        dataLoaded = true;
-//                        AddAndViewInformation.courseIsSelected = true;
-//                        AddAndViewInformation.courseName = courseName;
-//
-//                        if (loadingProgressBar != null) {
-//                            loadingProgressBar.setVisibility(View.GONE);
-//                        }
-//
-//                        enableGameButtons();
-//                        Toast.makeText(GamesScreen.this,
-//                                "Loaded: " + courseName + " (" + TermsAndDefinitions.TsAndDs.size() + " terms)",
-//                                Toast.LENGTH_SHORT).show();
-//                    });
-//
-//                } catch (IOException | SecurityException e) {
-//                    Log.e("LOADING PDF", "Error loading PDF", e);
-//                    runOnUiThread(() -> {
-//                        if (loadingProgressBar != null) {
-//                            loadingProgressBar.setVisibility(View.GONE);
-//                        }
-//                        Toast.makeText(GamesScreen.this,
-//                                "Failed to load PDF. Please select a course.",
-//                                Toast.LENGTH_LONG).show();
-//                        disableGameButtons();
-//                    });
-//                }
-//            }).start();
-//
-//        } else {
-//            // No PDF selected yet
-//            if (loadingProgressBar != null) {
-//                loadingProgressBar.setVisibility(View.GONE);
-//            }
-//            Toast.makeText(this, "Please select a course to start", Toast.LENGTH_LONG).show();
-//            disableGameButtons();
-//        }
-//    }
 
     private String readPdfFromUri(Uri uri) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();

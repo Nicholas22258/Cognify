@@ -24,8 +24,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -53,6 +56,10 @@ public class HomePage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
+    private DrawerLayout drawerLayout;
+    private ImageView ivMenu;
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +75,10 @@ public class HomePage extends AppCompatActivity {
         // Find views by ID
 //        ivProfilePicture = findViewById(R.id.ivProfilePicture);
         tvName = findViewById(R.id.tvName);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ivMenu = findViewById(R.id.ivMenu);
+        navigationView = findViewById(R.id.nav_view);
 
         tvStreakCountMG = findViewById(R.id.tvStreakCountMG);
         tvStreakCountDB = findViewById(R.id.tvStreakCountDB);
@@ -175,7 +186,28 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+        ivMenu.setOnClickListener(v ->{
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
 
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int itemID = item.getItemId();
+
+            if (itemID == R.id.homepage){
+                Toast.makeText(HomePage.this, "Home Page", Toast.LENGTH_SHORT).show();
+            }else if (itemID == R.id.information){
+                startActivity(new Intent(HomePage.this, AddAndViewInformation.class));
+            }else if (itemID == R.id.profile){
+                startActivity(new Intent(HomePage.this, ProfileActivity.class));
+            }else if (itemID == R.id.games){
+                startActivity(new Intent(HomePage.this, GamesScreen.class));
+            }else if (itemID == R.id.feedback){
+                startActivity(new Intent(HomePage.this, HelpActivity.class));
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
     }
 
     public void getUserDetails() {

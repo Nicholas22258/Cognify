@@ -16,6 +16,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
@@ -25,6 +26,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -35,8 +37,10 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import android.provider.OpenableColumns;
@@ -63,6 +67,10 @@ public class AddAndViewInformation extends AppCompatActivity {
 
     public static String courseName;
     public static boolean courseIsSelected = false;
+
+    private DrawerLayout drawerLayout;
+    private ImageView ivMenu;
+    private NavigationView navigationView;
 
     private final ActivityResultLauncher<Intent> filePickerLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -101,14 +109,18 @@ public class AddAndViewInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-        getWindow().setStatusBarColor(Color.BLACK);
         setContentView(R.layout.activity_add_and_view_information);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        getWindow().setStatusBarColor(Color.BLACK);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 //        systemBars.left, systemBars.top, systemBars.right, systemBars.bottom
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ivMenu = findViewById(R.id.ivMenu);
+        navigationView = findViewById(R.id.navigationView);
 
         displayView = findViewById(R.id.displayView);
         getPDFButton = findViewById(R.id.getPDFButton);
@@ -153,7 +165,6 @@ public class AddAndViewInformation extends AppCompatActivity {
                     // Already on home page, do nothing or refresh
                     startActivity(new Intent(AddAndViewInformation.this, HomePage.class));
 //                    Toast.makeText(AddAndViewInformation.this, "Home Page", Toast.LENGTH_SHORT).show();
-
                     return true;
                 } else if (item.getItemId() == R.id.nav_books) {
                     // Navigate to Books Activity
@@ -177,6 +188,29 @@ public class AddAndViewInformation extends AppCompatActivity {
             }
         });
         getPDFButton.setOnClickListener(v -> openFilePicker());
+
+        ivMenu.setOnClickListener(v ->{
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int itemID = item.getItemId();
+
+            if (itemID == R.id.homepage){
+                startActivity(new Intent(AddAndViewInformation.this, HomePage.class));
+            }else if (itemID == R.id.information){
+                Toast.makeText(AddAndViewInformation.this, "View Information Page", Toast.LENGTH_SHORT).show();
+            }else if (itemID == R.id.profile){
+                startActivity(new Intent(AddAndViewInformation.this, ProfileActivity.class));
+            }else if (itemID == R.id.games){
+                startActivity(new Intent(AddAndViewInformation.this, GamesScreen.class));
+            }else if (itemID == R.id.feedback){
+                startActivity(new Intent(AddAndViewInformation.this, HelpActivity.class));
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
 
         // Load the last selected PDF if available
         loadLastSelectedPdf();
@@ -369,5 +403,10 @@ public class AddAndViewInformation extends AppCompatActivity {
             sb.append(td.term).append(": ").append(td.getDefinition()).append("\n\n");
         }
         displayView.setText(sb.toString());
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
     }
 }

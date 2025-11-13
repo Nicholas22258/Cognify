@@ -24,8 +24,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,6 +54,10 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private int currentUserXP = 0;
+
+    private DrawerLayout drawerLayout;
+    private ImageView ivMenu;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +118,6 @@ public class ProfileActivity extends AppCompatActivity {
                     .setNegativeButton("No", null)
                     .show();
         });
-
-
     }
 
     private void deleteUserAccount() {
@@ -147,6 +152,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ivMenu = findViewById(R.id.ivMenu);
+        navigationView = findViewById(R.id.navigationView);
         usernameText = findViewById(R.id.tv_username);
         passwordText = findViewById(R.id.tv_password);
         milestoneProgress = findViewById(R.id.progress_milestone);
@@ -218,6 +226,29 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
+        });
+
+        ivMenu.setOnClickListener(v ->{
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int itemID = item.getItemId();
+
+            if (itemID == R.id.homepage){
+                startActivity(new Intent(ProfileActivity.this, HomePage.class));
+            }else if (itemID == R.id.information){
+                startActivity(new Intent(ProfileActivity.this, AddAndViewInformation.class));
+            }else if (itemID == R.id.profile){
+                Toast.makeText(ProfileActivity.this, "Profile Page", Toast.LENGTH_SHORT).show();
+            }else if (itemID == R.id.games){
+                startActivity(new Intent(ProfileActivity.this, GamesScreen.class));
+            }else if (itemID == R.id.feedback){
+                startActivity(new Intent(ProfileActivity.this, HelpActivity.class));
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
         });
     }
 

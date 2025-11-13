@@ -7,12 +7,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -24,12 +28,19 @@ public class HelpActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
 
+    private DrawerLayout drawerLayout;
+    private ImageView ivMenu;
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_feeback); // your XML
         getWindow().setStatusBarColor(Color.BLACK);
         // Find views
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ivMenu = findViewById(R.id.ivMenu);
+        navigationView = findViewById(R.id.navigationView);
         feedbackInput = findViewById(R.id.feedbackInput);
         feedbackSubmitBtn = findViewById(R.id.helpSubmitBtn);
         feedbackCancelBtn = findViewById(R.id.feedbackCancelBtn);
@@ -58,7 +69,33 @@ public class HelpActivity extends AppCompatActivity {
                 report.setAddressed(false);
 
                 sendReport(report);
+
+                feedbackInput.getText().clear();
+                Toast.makeText(this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        ivMenu.setOnClickListener(v ->{
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int itemID = item.getItemId();
+
+            if (itemID == R.id.homepage){
+                startActivity(new Intent(HelpActivity.this, HomePage.class));
+            }else if (itemID == R.id.information){
+                startActivity(new Intent(HelpActivity.this, AddAndViewInformation.class));
+            }else if (itemID == R.id.profile){
+                startActivity(new Intent(HelpActivity.this, ProfileActivity.class));
+            }else if (itemID == R.id.games){
+                startActivity(new Intent(HelpActivity.this, GamesScreen.class));
+            }else if (itemID == R.id.feedback){
+                Toast.makeText(HelpActivity.this, "Feedback Page", Toast.LENGTH_SHORT).show();
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
         });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -84,7 +121,7 @@ public class HelpActivity extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.nav_settings) {
                     // Navigate to Settings Activity
-                    Toast.makeText(HelpActivity.this, "Home Page", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HelpActivity.this, "Help Page", Toast.LENGTH_SHORT).show();
                     return true;
                 } else {
                     return false;
@@ -103,5 +140,10 @@ public class HelpActivity extends AppCompatActivity {
                 .addOnFailureListener(e ->
                         Toast.makeText(HelpActivity.this, "Error submitting report. Please try again later.", Toast.LENGTH_LONG).show()
                 );
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

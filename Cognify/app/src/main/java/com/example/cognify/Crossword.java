@@ -189,6 +189,7 @@ public class Crossword extends AppCompatActivity {
         for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
             //2.1)
             EditText cell = new EditText(context);
+            cell.setTextColor(Color.BLACK);
             //2.2)
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             //2.3)
