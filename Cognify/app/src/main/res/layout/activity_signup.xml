@@ -16,6 +16,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/gradientbgd"
+    android:fitsSystemWindows="true"
     tools:context=".SignupActivity">
 
     <LinearLayout
@@ -89,15 +90,15 @@
             android:textSize="14sp"
             android:fontFamily="sans-serif" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:text="Sign in with:"
-            android:textColor="@color/secondary_text"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:text="Sign in with:"-->
+<!--            android:textColor="@color/secondary_text"-->
+<!--            android:textSize="14sp"-->
+<!--            android:fontFamily="sans-serif" />-->
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -106,16 +107,16 @@
             android:layout_marginBottom="24dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/googleSignupButton"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="#D8FF9800"
-                android:text="Google"
-                android:textColor="#FBFBFB"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+<!--            <Button-->
+<!--                android:id="@+id/googleSignupButton"-->
+<!--                android:layout_width="120dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:backgroundTint="#D8FF9800"-->
+<!--                android:text="Google"-->
+<!--                android:textColor="#FBFBFB"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold" />-->
 
 
         </LinearLayout>

@@ -16,6 +16,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main"
     tools:context=".Crossword"
+    android:fitsSystemWindows="true"
     android:background="@color/black">
 
     <ImageButton
