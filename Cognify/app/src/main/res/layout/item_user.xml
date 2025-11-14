@@ -195,17 +195,19 @@
 
         <!-- Action Buttons -->
         <LinearLayout
+            android:id="@+id/buttonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="12dp"
-            android:gravity="end">
+            android:gravity="center_vertical">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/viewDetailsButton"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="View Details"
                 android:textSize="12sp"
                 app:strokeColor="#FF6B35"
@@ -215,18 +217,21 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/suspendButton"
                 style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Suspend"
                 android:textSize="12sp"
-                android:backgroundTint="#F44336" />
+                android:backgroundTint="#F44336"
+                android:layout_marginEnd="8dp" />
 
             <!-- Make Admin Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/makeAdminButton"
                 style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Make Admin"
                 android:textSize="12sp"
                 android:backgroundTint="#FFC107" />

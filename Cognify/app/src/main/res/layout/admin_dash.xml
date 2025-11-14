@@ -327,7 +327,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Reports"
+                                android:text="Feedback"
                                 android:textColor="#F49E20"
                                 android:textSize="16sp"
                                 android:textStyle="bold"/>
@@ -335,7 +335,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
-                                android:text="Generate and export reports"
+                                android:text="Generate and export feedback"
                                 android:textColor="@android:color/white"
                                 android:textSize="16sp"/>
                         </LinearLayout>

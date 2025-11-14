@@ -200,12 +200,12 @@
         app:layout_constraintEnd_toEndOf="@id/Def1"
         app:layout_constraintStart_toStartOf="@id/Def1"
         app:layout_constraintTop_toBottomOf="@id/Def4"  />
-
+<!--    android:layout_marginTop="8dp"-->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Term1"
         android:layout_width="165dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
+
         android:layout_marginStart="16dp"
         android:background="@drawable/mg_term_button_format"
         android:text="@string/MG_term"
@@ -218,7 +218,6 @@
         android:id="@+id/Term2"
         android:layout_width="165dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/mg_term_button_format"
@@ -232,7 +231,6 @@
         android:id="@+id/Term3"
         android:layout_width="165dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/mg_term_button_format"
@@ -246,7 +244,6 @@
         android:id="@+id/Term4"
         android:layout_width="165dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/mg_term_button_format"
@@ -260,7 +257,6 @@
         android:id="@+id/Term5"
         android:layout_width="165dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/mg_term_button_format"
