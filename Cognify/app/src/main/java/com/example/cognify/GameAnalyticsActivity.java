@@ -83,15 +83,33 @@ public class GameAnalyticsActivity extends AppCompatActivity {
 
         // Add table header
         TableRow headerRow = new TableRow(this);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT);
+        headerRow.setLayoutParams(params);
+
         String[] headers = {"Username", "UserID", "Plays"};
+        int countHeaders = 0;
         for (String header : headers) {
+            TableRow.LayoutParams newParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.33f);
+
             TextView tv = new TextView(this);
             tv.setText(header);
+            tv.setTextColor(getResources().getColor(R.color.black));
             tv.setPadding(24, 16, 24, 16);
             tv.setTextSize(16f);
             tv.setTypeface(null, android.graphics.Typeface.BOLD);
             tv.setBackgroundColor(0xFFBDBDBD); // gray header
+            if (countHeaders == 0){
+                 newParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.20f);
+            }else if (countHeaders == 1){
+                newParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.46f);
+            }else if (countHeaders == 2){
+                newParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.15f);
+            }
+            tv.setLayoutParams(newParams);
             headerRow.addView(tv);
+            countHeaders++;
         }
         playerTable.addView(headerRow);
 
@@ -116,6 +134,7 @@ public class GameAnalyticsActivity extends AppCompatActivity {
                         TableRow emptyRow = new TableRow(this);
                         TextView emptyText = new TextView(this);
                         emptyText.setText("No players have played this game yet.");
+                        emptyText.setTextColor(getResources().getColor(R.color.black));
                         emptyText.setPadding(24, 16, 24, 16);
                         emptyText.setTextSize(16f);
                         emptyRow.addView(emptyText);
@@ -140,15 +159,26 @@ public class GameAnalyticsActivity extends AppCompatActivity {
 
                                     TextView usernameTV = new TextView(this);
                                     usernameTV.setText(username);
+                                    usernameTV.setTextColor(getResources().getColor(R.color.black));
                                     usernameTV.setPadding(24, 12, 24, 12);
 
                                     TextView userIdTV = new TextView(this);
                                     userIdTV.setText(uid);
+                                    userIdTV.setTextColor(getResources().getColor(R.color.black));
                                     userIdTV.setPadding(24, 12, 24, 12);
 
                                     TextView playsTV = new TextView(this);
                                     playsTV.setText(String.valueOf(playCount));
+                                    playsTV.setTextColor(getResources().getColor(R.color.black));
                                     playsTV.setPadding(24, 12, 24, 12);
+
+                                    TableRow.LayoutParams usernameParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.20f);
+                                    TableRow.LayoutParams userIdParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.48f);
+                                    TableRow.LayoutParams playsParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.15f);
+
+                                    usernameTV.setLayoutParams(usernameParams);
+                                    userIdTV.setLayoutParams(userIdParams);
+                                    playsTV.setLayoutParams(playsParams);
 
                                     row.addView(usernameTV);
                                     row.addView(userIdTV);

@@ -130,7 +130,7 @@ public class AdminDashboardActivity extends AppCompatActivity
                             Log.d("FirestoreCheck", "Fetched username: " + username); // ✅ Add this
                             if (username != null) {
                                 navUserName.setText(username);
-                                welcomeText.setText("Welcome Back, " + username + "!");
+//                                welcomeText.setText("Welcome Back, " + username + "!");
                             } else {
                                 Log.d("FirestoreCheck", "Username is null");
                             }
