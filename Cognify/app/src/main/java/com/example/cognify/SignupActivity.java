@@ -37,7 +37,7 @@ import java.util.Map;
 public class SignupActivity extends AppCompatActivity {
 
     private EditText emailEditText, usernameEditText, passwordEditText;
-    private Button signupButton, googleSignupButton;
+    private Button signupButton /*googleSignupButton*/;
     private TextView loginPrompt;
 
     private FirebaseAuth mAuth;
@@ -65,7 +65,7 @@ public class SignupActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         signupButton = findViewById(R.id.signupButton);
-        googleSignupButton = findViewById(R.id.googleSignupButton);
+//        googleSignupButton = findViewById(R.id.googleSignupButton);
         loginPrompt = findViewById(R.id.loginPrompt);
         pb = findViewById(R.id.pbLoading);
     }
@@ -83,9 +83,9 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         // Google Signup placeholder
-        googleSignupButton.setOnClickListener(v ->
-                Toast.makeText(SignupActivity.this, "Google Sign Up - Coming Soon!", Toast.LENGTH_SHORT).show()
-        );
+//        googleSignupButton.setOnClickListener(v ->
+//                Toast.makeText(SignupActivity.this, "Google Sign Up - Coming Soon!", Toast.LENGTH_SHORT).show()
+//        );
 
         // Go to Login Screen
         loginPrompt.setOnClickListener(v -> {
