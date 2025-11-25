@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+- @Author Nicholas Leong        EDUV4551823
+- @Author Aarya Manowah         be.2023.q4t9k6
+- @Author Nyasha Masket 		BE.2023.R3M0Y0
+- @Author Sakhile Lesedi Mnisi 	BE.2022.j9f3j4
+- @Author Dominic Newton 		EDUV4818782
+- @Author Kimberly Sean Sibanda EDUV4818746
+-
+- Supervisor: Stacey Byrne      Stacey.byrne@eduvos.com
+-->
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".HomePage"
+    tools:openDrawer="start">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <!--  Added paddingBottom so content doesn't hide behind nav bar when scrolled  -->
+            <!--  Profile Picture  -->
+            <ImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/llDayCircles"
+                app:layout_constraintHorizontal_bias="0.956"
+                app:layout_constraintStart_toEndOf="@+id/llStreakCrossword"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.125"
+                app:tint="@android:color/white" />
+
+            <ImageView
+                android:id="@+id/ivProfilePicture"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="75dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_picture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <!--  Hello Text  -->
+            <TextView
+                android:id="@+id/tvHello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="sans-serif"
+                android:text="Hello,"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/ivProfilePicture"
+                app:layout_constraintTop_toTopOf="@id/ivProfilePicture"/>
+            <!--  Name Text  -->
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="User"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tvHello"
+                app:layout_constraintTop_toBottomOf="@id/tvHello"/>
+
+            <!-- Matching Game Streak Badge -->
+            <LinearLayout
+                android:id="@+id/llStreakMatchingGame"
+                android:layout_width="90dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/streak_badge_bg"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/llStreakDefinitionBuilder"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivProfilePicture">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_lightning_streak" />
+
+                <TextView
+                    android:id="@+id/tvStreakCountMG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/matchingGameStreakLabel"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Matching Game"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/llStreakMatchingGame"
+                app:layout_constraintStart_toStartOf="@+id/llStreakMatchingGame"
+                app:layout_constraintTop_toBottomOf="@+id/llStreakMatchingGame" />
+
+            <!-- Definition Builder Streak Badge -->
+            <LinearLayout
+                android:id="@+id/llStreakDefinitionBuilder"
+                android:layout_width="90dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/streak_badge_bg"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginStart="25dp"
+                app:layout_constraintEnd_toStartOf="@+id/llStreakCrossword"
+                app:layout_constraintStart_toEndOf="@+id/llStreakMatchingGame"
+                app:layout_constraintTop_toBottomOf="@id/ivProfilePicture">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_lightning_streak" />
+
+                <TextView
+                    android:id="@+id/tvStreakCountDB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/definitionBuilderStreakLabel"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Definition Builder"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/llStreakDefinitionBuilder"
+                app:layout_constraintStart_toStartOf="@+id/llStreakDefinitionBuilder"
+                app:layout_constraintTop_toBottomOf="@+id/llStreakDefinitionBuilder" />
+
+            <!-- Crossword Streak Badge -->
+            <LinearLayout
+                android:id="@+id/llStreakCrossword"
+                android:layout_width="90dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/streak_badge_bg"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/llStreakDefinitionBuilder"
+                app:layout_constraintTop_toBottomOf="@id/ivProfilePicture">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_lightning_streak" />
+
+                <TextView
+                    android:id="@+id/tvStreakCountCR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/crosswordStreakLabel"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Crossword"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/llStreakCrossword"
+                app:layout_constraintStart_toStartOf="@+id/llStreakCrossword"
+                app:layout_constraintTop_toBottomOf="@+id/llStreakCrossword" />
+
+            <LinearLayout
+                android:id="@+id/llDayCircles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/definitionBuilderStreakLabel">
+                <TextView
+                    style="@style/DayCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="M"/>
+
+                <TextView
+                    style="@style/DayCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="Tu"/>
+
+                <TextView
+                    style="@style/DayCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="W"/>
+
+                <TextView
+                    style="@style/DayCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="Th"/>
+
+                <TextView
+                    style="@style/DayCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="F"/>
+
+                <TextView
+                    style="@style/DayCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="Sa"/>
+
+                <TextView
+                    style="@style/DayCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="7dp"
+                    android:text="Su"/>
+            </LinearLayout>
+            <!--  Games Title  -->
+            <TextView
+                android:id="@+id/tvGamesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="32dp"
+                android:text="Games"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llDayCircles"/>
+            <!--  Games Cards Container  -->
+            <HorizontalScrollView
+                android:id="@+id/hsvGames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@id/tvGamesTitle">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="26dp"
+                    android:paddingEnd="26dp">
+                    <!--  Matching Game Card  -->
+                    <LinearLayout
+                        style="@style/GameCard"
+                        android:id="@+id/llMatchingGame">
+                        <ImageView
+                            style="@style/GameCardIcon"
+                            android:src="@drawable/ic_matching_game"/>
+                        <TextView
+                            style="@style/GameCardText"
+                            android:text="Matching Game"/>
+                    </LinearLayout>
+                    <!--  Definition Builder Card  -->
+                    <LinearLayout
+                        style="@style/GameCard"
+                        android:layout_marginStart="20dp"
+                        android:id="@+id/llDefinitionBuilder">
+                        <ImageView
+                            style="@style/GameCardIcon"
+                            android:src="@drawable/ic_definition_builder"/>
+                        <TextView
+                            style="@style/GameCardText"
+                            android:text="Definition Builder"/>
+                    </LinearLayout>
+                    <!--  Word Master Card  -->
+                    <LinearLayout
+                        style="@style/GameCard"
+                        android:layout_marginStart="20dp"
+                        android:id="@+id/llCrossword">
+                        <ImageView
+                            style="@style/GameCardIcon"
+                            android:src="@drawable/ic_crossword"/>
+                        <TextView
+                            style="@style/GameCardText"
+                            android:text="Crossword"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!--  In activity_home_page.xml  -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/nav_bar_background"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:itemIconSize="28dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/bottom_nav_color_selector"
+        app:itemActiveIndicatorStyle="@null"
+        app:itemBackground="@drawable/nav_active_indicator"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_nav_menu" />
+    <!--    app:itemIconTint="@null"-->
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/main_header"
+        app:menu="@menu/main_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
